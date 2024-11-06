@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=4 uid="uid://dbk3a63clumoq"]
+
+[ext_resource type="PackedScene" uid="uid://byipwp6ygdnhf" path="res://game/scenes/entities/character/player_character.tscn" id="1_u4dg0"]
+[ext_resource type="Texture2D" uid="uid://d0f3vkgg0oj31" path="res://icon.svg" id="2_jrlrc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t448m"]
+texture = ExtResource("2_jrlrc")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_7ec01"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_t448m")
+
+[node name="TestWorld" type="Node2D"]
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_u4dg0")]
+position = Vector2(456, 129)
+
+[node name="Layer0" type="TileMapLayer" parent="."]
+use_parent_material = true
+position = Vector2(196, 0)
+tile_map_data = PackedByteArray("AAABAAQAAAAAAAEAAAACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAEAAAADAAQAAAAAAAEAAAADAAYAAAABAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAABAAEAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAABAAAAAAAIAAcAAAABAAEAAAAHAAcAAAAAAAEAAAAGAAcAAAABAAAAAAAFAAcAAAABAAAAAAAEAAcAAAABAAAAAAADAAcAAAAAAAEAAAABAAcAAAABAAEAAAADAAUAAAAAAAEAAAACAAcAAAABAAEAAAAJAAYAAAABAAEAAAAJAAcAAAABAAAAAAAKAAcAAAABAAAAAAAKAAYAAAABAAAAAAALAAcAAAABAAAAAAALAAYAAAABAAAAAAANAAYAAAAAAAEAAAAMAAUAAAABAAEAAAAMAAYAAAAAAAEAAAAMAAcAAAAAAAEAAAANAAcAAAAAAAEAAAANAAUAAAAAAAEAAAALAAUAAAAAAAEAAAALAAQAAAAAAAAAAAAMAAQAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_7ec01")
