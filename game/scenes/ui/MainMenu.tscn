@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://bul8qa3ybee6e"]
+
+[ext_resource type="Script" path="res://game/src/ui/MainMenu.cs" id="1_vuguy"]
+
+[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("myLabel")]
+script = ExtResource("1_vuguy")
+myLabel = NodePath("CanvasLayer/Control/Label")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -129.0
+offset_right = 35.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -84.0
+offset_right = 35.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Option"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -39.0
+offset_right = 35.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_top = 124.0
+offset_right = 26.0
+offset_bottom = 147.0
+grow_horizontal = 2
+text = "<Title>"
+
+[connection signal="button_up" from="CanvasLayer/Control/StartButton" to="." method="_on_button_button1_up"]
+[connection signal="button_up" from="CanvasLayer/Control/OptionsButton" to="." method="_on_button_button2_up"]
+[connection signal="button_up" from="CanvasLayer/Control/QuitButton" to="." method="_on_button_button3_up"]
