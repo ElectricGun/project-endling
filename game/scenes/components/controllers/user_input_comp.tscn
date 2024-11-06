@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://5gbsxai7xjbt"]
+[gd_scene load_steps=2 format=3 uid="uid://5gbsxai7xjbt"]
+
+[ext_resource type="Script" path="res://game/src/components/controllers/UserInputComp.cs" id="1_lf03v"]
 
 [node name="UserInputComp" type="Node"]
+script = ExtResource("1_lf03v")
