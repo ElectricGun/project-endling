@@ -3,15 +3,11 @@ using System;
 using System.Runtime.CompilerServices;
 
 [GlobalClass]
-public partial class PhysicsComp : Node2D
+public partial class PhysicsComp : BaseComp
 {
-	[Export] 
-	public CharacterBody2D PhysicsObject {get; private set;}
-	[Export] 
-	public float Gravity = 1;
-	[Export] 
-	public Vector2 MaxSpeed = new(0, 0); 
-	[Export] public RichTextLabel DebugText;
+	[Export] public CharacterBody2D PhysicsObject {get; private set;}
+	[Export] public float Gravity = 1;
+	[Export] public Vector2 MaxSpeed = new(0, 0); 
 
 
 	public override void _Ready()
@@ -80,11 +76,8 @@ public partial class PhysicsComp : Node2D
 		PhysicsObject.Velocity = NewVelocity;
 		PhysicsObject.MoveAndSlide();
 
-
-		if (DebugText != null) {
-			DebugText.Text = "PhysicsComp\n" + 
+		PrintDebugLabel("PhysicsComp", 
 								"VelocityX: " + PhysicsObject.Velocity.X + "\n" +
-								"VelocityY: " + PhysicsObject.Velocity.Y;
-		}
+								"VelocityY: " + PhysicsObject.Velocity.Y);
 	}
 }

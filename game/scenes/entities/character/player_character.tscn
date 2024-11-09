@@ -27,11 +27,12 @@ MaxSpeed = Vector2(1000, 1000)
 DebugText = NodePath("PhysicsDebug")
 
 [node name="PhysicsDebug" type="RichTextLabel" parent="PhysicsComp"]
-offset_left = 255.0
-offset_top = -66.0
-offset_right = 755.0
-offset_bottom = 3.0
-text = "PhysicsComp"
+offset_left = 158.0
+offset_top = -137.0
+offset_right = 658.0
+offset_bottom = -68.0
+bbcode_enabled = true
+text = "[b]PhysicsComp[/b]"
 fit_content = true
 
 [node name="UserControlComp" type="Node" parent="."]
@@ -47,9 +48,10 @@ JumpStrength = 400.0
 DebugText = NodePath("MovementDebug")
 
 [node name="MovementDebug" type="RichTextLabel" parent="MovementComp"]
-offset_left = 45.0
-offset_top = -66.0
-offset_right = 545.0
-offset_bottom = 26.0
-text = "MovementComp"
+offset_left = -25.0
+offset_top = -137.0
+offset_right = 475.0
+offset_bottom = -45.0
+bbcode_enabled = true
+text = "[b]MovementComp[/b]"
 fit_content = true

@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class MovementComp : Node2D
+public partial class MovementComp : BaseComp
 {
 	[Export] public PhysicsComp PhysicsComponent;
 	[Export] BaseAIComp AIComp;
@@ -10,7 +10,6 @@ public partial class MovementComp : Node2D
 	[Export] public float HorizontalLerpSpeed = 1;
 	[Export] public float JumpStrength = 1000; 
 	[Export] public int MaxJumps = 2;
-	[Export] public RichTextLabel DebugText;
 	public int JumpCounter {get; protected set;} = 0;
 	public bool CanJump {get; protected set;} = true;
 	public bool IsAlreadyJumped {get; private set;} = false;
@@ -45,13 +44,9 @@ public partial class MovementComp : Node2D
 			IsAlreadyMidair = true;
 		}
 
-
-		if (DebugText != null) {
-			DebugText.Text = "MovementComp\n" + 
+			PrintDebugLabel("MovementComp",
 								"JumpCounter: " + JumpCounter + "\n" +
 								"AlreadyJumped: " + IsAlreadyJumped + "\n" +
-								"AlreadyMidair: " + IsAlreadyMidair + "\n"
-								;
-		}
+								"AlreadyMidair: " + IsAlreadyMidair);
 	}
 }
