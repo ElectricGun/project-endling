@@ -1,8 +1,11 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class BaseAIComp : Node
 {
-	public Vector2 MoveDir {get; protected set;}
+	public int MoveDirX {get; protected set;} = 0;
+	public int MoveDirY {get; protected set;} = 0;
+
 	public bool IsJumping {get; protected set;}
 }

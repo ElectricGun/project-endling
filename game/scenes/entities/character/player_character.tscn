@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://byipwp6ygdnhf"]
+[gd_scene load_steps=7 format=3 uid="uid://byipwp6ygdnhf"]
 
 [ext_resource type="Script" path="res://game/src/entities/character/PlayerCharacter.cs" id="1_gas2m"]
 [ext_resource type="Texture2D" uid="uid://d0f3vkgg0oj31" path="res://icon.svg" id="1_nvosf"]
 [ext_resource type="Script" path="res://game/src/components/physics/PhysicsComp.cs" id="3_ud2xk"]
+[ext_resource type="Script" path="res://game/src/components/controllers/UserControlComp.cs" id="4_paoe7"]
+[ext_resource type="Script" path="res://game/src/components/physics/MovementComp.cs" id="5_hlhxa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f8qi"]
 size = Vector2(48, 48)
@@ -17,9 +19,37 @@ texture = ExtResource("1_nvosf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7f8qi")
 
-[node name="PhysicsComp" type="Node2D" parent="." node_paths=PackedStringArray("PhysicsObject")]
-position = Vector2(27, -1)
+[node name="PhysicsComp" type="Node2D" parent="." node_paths=PackedStringArray("PhysicsObject", "DebugText")]
 script = ExtResource("3_ud2xk")
 PhysicsObject = NodePath("..")
-Gravity = 1000.0
+Gravity = 1200.0
 MaxSpeed = Vector2(1000, 1000)
+DebugText = NodePath("PhysicsDebug")
+
+[node name="PhysicsDebug" type="RichTextLabel" parent="PhysicsComp"]
+offset_left = 255.0
+offset_top = -66.0
+offset_right = 755.0
+offset_bottom = 3.0
+text = "PhysicsComp"
+fit_content = true
+
+[node name="UserControlComp" type="Node" parent="."]
+script = ExtResource("4_paoe7")
+
+[node name="MovementComp" type="Node2D" parent="." node_paths=PackedStringArray("PhysicsComponent", "AIComp", "DebugText")]
+script = ExtResource("5_hlhxa")
+PhysicsComponent = NodePath("../PhysicsComp")
+AIComp = NodePath("../UserControlComp")
+HorizontalSpeed = 500.0
+HorizontalLerpSpeed = 0.15
+JumpStrength = 400.0
+DebugText = NodePath("MovementDebug")
+
+[node name="MovementDebug" type="RichTextLabel" parent="MovementComp"]
+offset_left = 45.0
+offset_top = -66.0
+offset_right = 545.0
+offset_bottom = 26.0
+text = "MovementComp"
+fit_content = true
