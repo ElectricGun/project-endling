@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bul8qa3ybee6e"]
+[gd_scene load_steps=2 format=3 uid="uid://bq5c6k4056p0a"]
 
-[ext_resource type="Script" path="res://game/src/ui/MainMenu.cs" id="1_vuguy"]
+[ext_resource type="Script" path="res://game/src/ui/MainMenu.cs" id="1_finju"]
 
 [node name="MainMenu" type="Node2D" node_paths=PackedStringArray("myLabel")]
-script = ExtResource("1_vuguy")
+script = ExtResource("1_finju")
 myLabel = NodePath("CanvasLayer/Control/Label")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -73,6 +73,6 @@ offset_bottom = 147.0
 grow_horizontal = 2
 text = "<Title>"
 
-[connection signal="button_up" from="CanvasLayer/Control/StartButton" to="." method="_on_button_button1_up"]
-[connection signal="button_up" from="CanvasLayer/Control/OptionsButton" to="." method="_on_button_button2_up"]
-[connection signal="button_up" from="CanvasLayer/Control/QuitButton" to="." method="_on_button_button3_up"]
+[connection signal="button_up" from="CanvasLayer/Control/StartButton" to="." method="OnButtonStartUp"]
+[connection signal="button_up" from="CanvasLayer/Control/OptionsButton" to="." method="OnButtonOptionsUp"]
+[connection signal="button_up" from="CanvasLayer/Control/QuitButton" to="." method="OnButtonQuitUp"]

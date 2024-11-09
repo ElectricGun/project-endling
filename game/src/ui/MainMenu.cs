@@ -13,15 +13,15 @@ public partial class MainMenu : Node2D
 	{
 	}
 	
-	public void _on_button_button1_up(){
+	public void OnButtonStartUp(){
 		myLabel.Text = "Starting da game";
 	}
 	
-	public void _on_button_button2_up(){
+	public void OnButtonOptionsUp(){
 		myLabel.Text = "opening the options menu";
 	}
 	
-	public void _on_button_button3_up(){
+	public void OnButtonQuitUp(){
 		myLabel.Text = "quitting...";
 	}
 }
