@@ -543,3 +543,5 @@ fabric.properties
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/godot,csharp,visualstudiocode,intellij
+
+.saves

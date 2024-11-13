@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfjj84flvnk40"]
+
+[ext_resource type="Script" path="res://game/src/ui/buttons/NewSaveButton.cs" id="1_1go5w"]
+
+[node name="NewSaveButton" type="Button"]
+custom_minimum_size = Vector2(256, 64)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "+"
+script = ExtResource("1_1go5w")
+
+[connection signal="button_down" from="." to="." method="OnButtonDown"]
