@@ -1,6 +1,7 @@
 using Godot;
+using Godot.Collections;
 using System;
-
+using static DictionaryKeys;
 public partial class SaveSelectionMenu : Menu
 {
 	[Export] protected Container GridContainer;
@@ -16,12 +17,21 @@ public partial class SaveSelectionMenu : Menu
 
 	private void AddLoadSaveButton(string PathToSaveFolder) {
 		PathToSaveFolder = ProjectSettings.GlobalizePath(PathToSaveFolder);
-		LoadSaveButton Button = (LoadSaveButton) SceneReferences.LOAD_SAVE_BUTTON.Instantiate();
-		Button.Text = PathToSaveFolder.GetFile();
-		Button.LinkToSaveDirectory = PathToSaveFolder;
-		GridContainer.AddChild(Button);
+		LoadSaveButton LoadButton = (LoadSaveButton) SceneReferences.LOAD_SAVE_BUTTON.Instantiate();
+		LoadButton.Text = PathToSaveFolder.GetFile();
+		LoadButton.SaveLoaded += OnSaveLoaded;
+		LoadButton.LinkToSaveDirectory = PathToSaveFolder;
+		GridContainer.AddChild(LoadButton);
 	}
 
+	public void OnSaveLoaded(Dictionary saveData) {
+		GD.Print(saveData);
+		
+		int CurrentLevelID = (int) saveData[KeyCurrentLevel];
+		Level CurrentLevel = (Level) Levels.LevelMapping[CurrentLevelID].Instantiate();
+		CurrentLevel.Load(saveData);
+		Transition(CurrentLevel);
+	}
 
 	public void OnButtonPressed()
 	{

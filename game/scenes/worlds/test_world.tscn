@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://dbk3a63clumoq"]
+[gd_scene load_steps=7 format=4 uid="uid://dbk3a63clumoq"]
 
 [ext_resource type="PackedScene" uid="uid://byipwp6ygdnhf" path="res://game/scenes/entities/character/player_character.tscn" id="1_u4dg0"]
+[ext_resource type="Script" path="res://game/src/gameplay/Level.cs" id="1_xs60i"]
 [ext_resource type="Texture2D" uid="uid://d0f3vkgg0oj31" path="res://icon.svg" id="2_jrlrc"]
 [ext_resource type="Script" path="res://game/src/utils/FollowCamera.cs" id="3_htosn"]
 
@@ -21,7 +22,10 @@ tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_t448m")
 
-[node name="TestWorld" type="Node2D"]
+[node name="TestWorld" type="Node2D" node_paths=PackedStringArray("PlayerCharacter", "CanvasLayer")]
+script = ExtResource("1_xs60i")
+PlayerCharacter = NodePath("PlayerCharacter")
+CanvasLayer = NodePath("CanvasLayer")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_u4dg0")]
 position = Vector2(456, 129)
@@ -36,3 +40,5 @@ tile_set = SubResource("TileSet_7ec01")
 script = ExtResource("3_htosn")
 FollowObject = NodePath("../PlayerCharacter")
 LerpSpeed = 0.02
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
