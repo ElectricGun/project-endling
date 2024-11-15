@@ -1,20 +1,17 @@
 using Godot;
 using System;
 
-public partial class MainMenu : Node2D
+public partial class MainMenu : Menu
 {
 	[Export] public Label myLabel;
 	public override void _Ready()
 	{
-		myLabel.Text = "ENDLING";
-	}
-
-	public override void _Process(double delta)
-	{
+		base._Ready();
+		myLabel.Text = "PROJECT ENDLING";
 	}
 	
 	public void OnButtonStartUp(){
-		myLabel.Text = "Starting da game";
+		Transition(SceneReferences.SAVE_SELECTION_MENU);
 	}
 	
 	public void OnButtonOptionsUp(){
@@ -22,6 +19,6 @@ public partial class MainMenu : Node2D
 	}
 	
 	public void OnButtonQuitUp(){
-		myLabel.Text = "quitting...";
+		GetTree().Quit(1);
 	}
 }

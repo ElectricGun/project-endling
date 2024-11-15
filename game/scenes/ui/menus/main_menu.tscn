@@ -1,10 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bq5c6k4056p0a"]
 
-[ext_resource type="Script" path="res://game/src/ui/MainMenu.cs" id="1_finju"]
+[ext_resource type="Script" path="res://game/src/ui/menus/MainMenu.cs" id="1_a281r"]
 
-[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("myLabel")]
-script = ExtResource("1_finju")
+[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("myLabel", "CanvasLayer")]
+script = ExtResource("1_a281r")
 myLabel = NodePath("CanvasLayer/Control/Label")
+CanvasLayer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

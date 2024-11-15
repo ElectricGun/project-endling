@@ -10,3 +10,5 @@ text = "save_name"
 alignment = 0
 text_overrun_behavior = 1
 script = ExtResource("1_ftxgk")
+
+[connection signal="button_down" from="." to="." method="OnButtonDown"]

@@ -1,17 +1,19 @@
 using Godot;
 using System;
+using System.IO;
 
 public partial class LoadSaveButton : Button
 {
 	public String LinkToSaveDirectory;
 
-	public LoadSaveButton () {
-	}
 
-	public override void _Ready()
-	{
-	}
-	public override void _Process(double delta)
-	{
+	public void OnButtonDown() {
+
+		try {
+			GD.Print(SaveUtils.LoadSave(LinkToSaveDirectory));
+		} catch (Exception e) {
+			GD.Print("[LoadSaveButton.OnButtonDown] " + LinkToSaveDirectory );
+			GD.Print(e);
+		}
 	}
 }
