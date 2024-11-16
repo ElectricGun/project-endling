@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://dbk3a63clumoq"]
+[gd_scene load_steps=8 format=4 uid="uid://dbk3a63clumoq"]
 
 [ext_resource type="PackedScene" uid="uid://byipwp6ygdnhf" path="res://game/scenes/entities/character/player_character.tscn" id="1_u4dg0"]
 [ext_resource type="Script" path="res://game/src/gameplay/Level.cs" id="1_xs60i"]
 [ext_resource type="Texture2D" uid="uid://d0f3vkgg0oj31" path="res://icon.svg" id="2_jrlrc"]
 [ext_resource type="Script" path="res://game/src/utils/FollowCamera.cs" id="3_htosn"]
+[ext_resource type="Script" path="res://game/src/gameplay/LevelObject.cs" id="5_f8fif"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t448m"]
 texture = ExtResource("2_jrlrc")
@@ -22,8 +23,9 @@ tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_t448m")
 
-[node name="TestWorld" type="Node2D" node_paths=PackedStringArray("PlayerCharacter", "CanvasLayer")]
+[node name="TestWorld" type="Node2D" node_paths=PackedStringArray("SavedObjectTree", "PlayerCharacter", "CanvasLayer")]
 script = ExtResource("1_xs60i")
+SavedObjectTree = NodePath("SavedObjects")
 PlayerCharacter = NodePath("PlayerCharacter")
 CanvasLayer = NodePath("CanvasLayer")
 
@@ -42,3 +44,11 @@ FollowObject = NodePath("../PlayerCharacter")
 LerpSpeed = 0.02
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StaticObjects" type="Node" parent="."]
+
+[node name="SavedObjects" type="Node" parent="."]
+
+[node name="LevelObject" type="Node2D" parent="SavedObjects"]
+position = Vector2(1, 0)
+script = ExtResource("5_f8fif")

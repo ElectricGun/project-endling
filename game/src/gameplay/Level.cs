@@ -1,38 +1,92 @@
+using System;
+using System.Linq;
 using Godot;
 using Godot.Collections;
+using System.Reflection;
+
 using static DictionaryKeys;
+using System.Collections;
 [GlobalClass]
 public partial class Level : Menu
 {
-	[Export] public Node MutableObjectTree;
+	[Export] public int LevelID = -999;
+	[Export] public Node SavedObjectTree;
 	[Export] public Node StaticObjectTree;
+	[Export] public Node HiddenObjectTree;
 	[Export] public PlayerCharacter PlayerCharacter;
 
-	public void Load(Dictionary levelData) {
-		Dictionary PlayerData = (Dictionary) levelData[KeyPlayerData];
-		PlayerCharacter.GlobalPosition = new Vector2((float) PlayerData[KeyPositionX], (float) PlayerData[KeyPositionY]);
-		PlayerCharacter.Velocity = new Vector2((float) PlayerData[KeyVelocityX], (float) PlayerData[KeyVelocityY]);
-	}
+	protected bool IsImportingData = false;
+	protected Dictionary SaveDataToImport;
 
-/* TODO implement saving
-	public Dictionary Save() {
-		LevelData Out = new LevelData();
-		Array<Node> MutableObjects = MutableObjectTree.GetChildren();
+	public override void _Ready()
+	{
+		base._Ready();
 
-		foreach(Node mutableObject in MutableObjects) {
-			ObjectData CurrObjectData = new ObjectData();
-			
-			if (mutableObject is Node2D node2D)
-				Position = node2D.GlobalPosition;
+		if (IsImportingData) ImportData(SaveDataToImport);
 
-			if (mutableObject is CharacterBody2D collisionObject2D)
-				CurrObjectData.Velocity = collisionObject2D.Velocity;
-			else
-				CurrObjectData.Velocity = new Vector2();
+		//GD.Print(ExportData());
 
-			Out.MutableObjects.Add(CurrObjectData);
+		if (HiddenObjectTree != null) {
+			foreach (Node node in HiddenObjectTree.GetChildren()) {
+				if (node is CanvasItem canvasItem) {
+					canvasItem.Visible = false;
+				}
+			}
 		}
-		return Out;
 	}
-	*/
+
+	public void QueueImportData(Dictionary saveData) {
+		IsImportingData = true;
+		SaveDataToImport = saveData;
+	}
+
+	
+
+	protected void ImportData(Dictionary saveData) {
+		Dictionary LevelsDict = (Dictionary)saveData[KeySavedLevels];
+
+		if (LevelsDict.ContainsKey((string) saveData[KeyCurrentLevel])) {
+
+			Dictionary PlayerData = (Dictionary) saveData[KeyPlayerData];
+			PlayerCharacter.GlobalPosition = new Vector2((float) PlayerData[KeyPositionX], (float) PlayerData[KeyPositionY]);
+			PlayerCharacter.Velocity = new Vector2((float) PlayerData[KeyVelocityX], (float) PlayerData[KeyVelocityY]);
+
+			Dictionary LevelData = (Dictionary) LevelsDict[(string) saveData[KeyCurrentLevel]];
+			Array<Dictionary> LevelObjects = (Array<Dictionary>) LevelData[KeyLevelObjects];
+
+			foreach (Dictionary LevelObjectData in LevelObjects) {
+				string NodePath = (string) LevelObjectData[KeyNodePath];
+
+				// import data to objects that are not spawned, otherwise spawn the objects and import data
+				if (!string.IsNullOrEmpty(NodePath) && !(bool) LevelObjectData[KeyIsSpawned]) {
+					try {
+						((LevelObject) GetNode(NodePath)).ImportData(LevelObjectData);
+					} catch (Exception e) {
+						GD.Print("[Level.ImportData] Error getting node " + NodePath);
+						GD.Print(e);
+					}
+
+				} else {
+					LevelObject Object = (LevelObject) Activator.CreateInstance(Type.GetType((string) LevelObjectData[KeyNodeType]));
+					Object.ImportData(LevelObjectData);
+					SavedObjectTree.AddChild(Object);
+				}
+			}
+			GD.Print("[Level.ImportData] Successfully imported level");
+		}
+	}
+
+	public Dictionary ExportData() {
+		Dictionary Data = SaveUtils.GenerateLevelDataTemplateDict();
+		Array<Node> SavedObjects = SavedObjectTree.GetChildren();
+
+		foreach(Node mutableObject in SavedObjects) {
+			
+			if (mutableObject is LevelObject levelObject && levelObject.IsSaved) {
+				((Godot.Collections.Array)Data[KeyLevelObjects]).Add(levelObject.ExportData());
+			}
+		}
+		return Data;
+	}
+	
 }

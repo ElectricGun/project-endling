@@ -24,9 +24,21 @@ public class SaveUtils {
 		NewSave("unnamed_game_save", directory);
 	}
 
-	public static Dictionary GenerateSaveTemplateDict(string saveName) {
+	public static Dictionary GenerateObjectDataTemplateDict() {
+		Dictionary PlayerData = new()
+		{
+			{ KeyIsSpawned, false },
+			{ KeyNodePath , "" },
+			{ KeyPositionY, 0 },
+			{ KeyVelocityX, 0 },
+			{ KeyVelocityY, 0 },
+			{ KeyNodeType, typeof(LevelObject).ToString()}
+		};
 
-		// player data
+		return PlayerData;
+	}
+
+	public static Dictionary GeneratePlayerDataTemplateDict() {
 		Dictionary PlayerData = new()
 		{
 			{ KeyPositionX, 0 },
@@ -36,15 +48,24 @@ public class SaveUtils {
 			{ KeyCheckpoint, 0 }
 		};
 
+		return PlayerData;
+	}
+
+	public static Dictionary GenerateLevelDataTemplateDict() {
 		// create starting level with empty object data
 		Dictionary WorldData = new()
 		{
 			{ KeyLevelObjects, new Godot.Collections.Array() }
 		};
+		return WorldData;
+	}
+
+	public static Dictionary GenerateSaveTemplateDict(string saveName) {
+
 		// add starting level to levels
-		Godot.Collections.Array Levels = new()
+		Dictionary Levels = new()
 		{
-			WorldData
+			 {"0", GenerateLevelDataTemplateDict()}
 		};
 
 		// master data
@@ -53,7 +74,7 @@ public class SaveUtils {
             { KeyRevision, SaveFileRevision },
             { KeySaveName, saveName },
             { KeyCurrentLevel, 0 },
-            { KeyPlayerData, PlayerData },
+            { KeyPlayerData, GeneratePlayerDataTemplateDict()},
             { KeySavedLevels, Levels }
         };
 		
@@ -87,9 +108,9 @@ public class SaveUtils {
 
 
     public static Dictionary LoadSave(string name, string directory) {
-
         string SavePath = directory.PathJoin(name);
 		return LoadSave(SavePath);
-
     }
+
+
 }

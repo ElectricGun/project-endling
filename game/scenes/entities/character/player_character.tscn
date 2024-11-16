@@ -27,6 +27,7 @@ MaxSpeed = Vector2(1000, 1000)
 DebugText = NodePath("PhysicsDebug")
 
 [node name="PhysicsDebug" type="RichTextLabel" parent="PhysicsComp"]
+visible = false
 offset_left = 158.0
 offset_top = -137.0
 offset_right = 658.0
@@ -44,10 +45,11 @@ PhysicsComponent = NodePath("../PhysicsComp")
 AIComp = NodePath("../UserControlComp")
 HorizontalSpeed = 500.0
 HorizontalLerpSpeed = 0.15
-JumpStrength = 400.0
+JumpStrength = 500.0
 DebugText = NodePath("MovementDebug")
 
 [node name="MovementDebug" type="RichTextLabel" parent="MovementComp"]
+visible = false
 offset_left = -25.0
 offset_top = -137.0
 offset_right = 475.0

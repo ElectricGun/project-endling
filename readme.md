@@ -1,6 +1,6 @@
 IMPORTANT
 
-Current Save Schema:
+Current Save Schema (revision 2):
 
 saveName     : string
 revision     : int
@@ -12,13 +12,18 @@ playerData : Dictionary {
     velocityX  : int
     velocityY  : int
 }
-savedLevels : Array of Dictionaries [
-    {
-        levelObjects : Array of Dictionaries {
-            positionX : int
-            positionY : int
-            velocityX : int
-            velocityY : int
+savedLevels : Dictionary {
+    levelData : Dictionary {
+            levelObjects : Array [
+                objectData : Dictionary : {
+                    isSpawned : bool
+                    nodePath  : string
+                    nodeType  : type
+                    positionX : int
+                    positionY : int
+                    velocityX : int
+                    velocityY : int
+                }
+            ]
         }
-    }
-]
+}

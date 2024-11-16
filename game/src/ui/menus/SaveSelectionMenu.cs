@@ -24,12 +24,10 @@ public partial class SaveSelectionMenu : Menu
 		GridContainer.AddChild(LoadButton);
 	}
 
-	public void OnSaveLoaded(Dictionary saveData) {
-		GD.Print(saveData);
-		
+	public void OnSaveLoaded(Dictionary saveData) {		
 		int CurrentLevelID = (int) saveData[KeyCurrentLevel];
 		Level CurrentLevel = (Level) Levels.LevelMapping[CurrentLevelID].Instantiate();
-		CurrentLevel.Load(saveData);
+		CurrentLevel.QueueImportData(saveData);
 		Transition(CurrentLevel);
 	}
 

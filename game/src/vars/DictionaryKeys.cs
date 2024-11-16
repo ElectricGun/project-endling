@@ -12,6 +12,9 @@ public static class DictionaryKeys {
         KeySaveName  = "saveName",
         KeyCurrentLevel = "currentLevel",
         KeyPlayerData = "playerData",
-        KeySavedLevels = "savedLevels"
+        KeySavedLevels = "savedLevels",
+        KeyNodePath = "nodePath",
+        KeyIsSpawned = "isSpawned",
+        KeyNodeType = "nodeType"
         ;
 }

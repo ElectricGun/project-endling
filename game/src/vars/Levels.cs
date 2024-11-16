@@ -7,6 +7,7 @@ public static class Levels
     
     static Levels() 
     {
-        LevelMapping.Add(0, GD.Load<PackedScene>("res://game/scenes/worlds/test_world.tscn"));
+        LevelMapping.Add(-1, GD.Load<PackedScene>("res://game/scenes/worlds/test_world.tscn"));
+        LevelMapping.Add(0, GD.Load<PackedScene>("res://game/scenes/worlds/level_1.tscn"));
     }
 }
