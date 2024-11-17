@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dbk3a63clumoq"]
+[gd_scene load_steps=9 format=4 uid="uid://dbk3a63clumoq"]
 
 [ext_resource type="PackedScene" uid="uid://byipwp6ygdnhf" path="res://game/scenes/entities/character/player_character.tscn" id="1_u4dg0"]
 [ext_resource type="Script" path="res://game/src/gameplay/Level.cs" id="1_xs60i"]
@@ -23,6 +23,9 @@ tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_t448m")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ea5sp"]
+size = Vector2(230, 20)
+
 [node name="TestWorld" type="Node2D" node_paths=PackedStringArray("SavedObjectTree", "PlayerCharacter", "CanvasLayer")]
 script = ExtResource("1_xs60i")
 SavedObjectTree = NodePath("SavedObjects")
@@ -46,6 +49,39 @@ LerpSpeed = 0.02
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="StaticObjects" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StaticObjects"]
+position = Vector2(415, 154)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticObjects/StaticBody2D"]
+shape = SubResource("RectangleShape2D_ea5sp")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticObjects/StaticBody2D"]
+scale = Vector2(1.82812, 0.125)
+texture = ExtResource("2_jrlrc")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="StaticObjects"]
+position = Vector2(493, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticObjects/StaticBody2D2"]
+shape = SubResource("RectangleShape2D_ea5sp")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticObjects/StaticBody2D2"]
+scale = Vector2(1.82812, 0.125)
+texture = ExtResource("2_jrlrc")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="StaticObjects"]
+position = Vector2(665, 104)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticObjects/StaticBody2D3"]
+shape = SubResource("RectangleShape2D_ea5sp")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticObjects/StaticBody2D3"]
+scale = Vector2(1.82812, 0.125)
+texture = ExtResource("2_jrlrc")
 
 [node name="SavedObjects" type="Node" parent="."]
 

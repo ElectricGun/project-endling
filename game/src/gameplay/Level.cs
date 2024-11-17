@@ -1,11 +1,8 @@
 using System;
-using System.Linq;
 using Godot;
 using Godot.Collections;
-using System.Reflection;
 
 using static DictionaryKeys;
-using System.Collections;
 [GlobalClass]
 public partial class Level : Menu
 {
@@ -57,7 +54,7 @@ public partial class Level : Menu
 			foreach (Dictionary LevelObjectData in LevelObjects) {
 				string NodePath = (string) LevelObjectData[KeyNodePath];
 
-				// import data to objects that are not spawned, otherwise spawn the objects and import data
+				// import data to objects that are placed by default, otherwise spawn the objects and import data
 				if (!string.IsNullOrEmpty(NodePath) && !(bool) LevelObjectData[KeyIsSpawned]) {
 					try {
 						((LevelObject) GetNode(NodePath)).ImportData(LevelObjectData);
@@ -73,6 +70,8 @@ public partial class Level : Menu
 				}
 			}
 			GD.Print("[Level.ImportData] Successfully imported level");
+		} else {
+			GD.Print("[Level.ImportData] Level not found in save file, creating...");
 		}
 	}
 
@@ -88,5 +87,4 @@ public partial class Level : Menu
 		}
 		return Data;
 	}
-	
 }
