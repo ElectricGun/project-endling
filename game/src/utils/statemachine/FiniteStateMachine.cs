@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Godot.Collections;
 
@@ -10,16 +11,26 @@ public partial class FiniteStateMachine : Node {
 	//
 	public State CurrentState;
 	// Dictionary list of all children
-	public Dictionary States = new();
+	public Dictionary<string, State> States = new();
 
 	public override void _Ready() {
 		
 		// Define States
-		var Children = GetChildren();
+		Array<Node> Children = GetChildren();
+
+
 		for (int i = 0; i < Children.Count; i++) {
-			State Child = (State) Children[i];
-			States.Add(Child.Name, Child);
-			Child.Transitioned += OnChildTransition;
+			try {
+			Node Child = Children[i];
+			if (Child is State state) {
+
+				States.Add(state.Name, state);
+				state.Transitioned += OnChildTransition;
+			}
+			} catch (Exception e) {
+				GD.Print(e);
+			}
+
 		}
 
 		if (InitialState != null) {
@@ -49,7 +60,8 @@ public partial class FiniteStateMachine : Node {
 								/* Optional */ //string Animation, 
 								/* Optional */ Dictionary Flags) {
 									
-		State NewState = (State) States[NewStateName];
+		State NewState = States[NewStateName];
+
 		if (State != CurrentState) {
 			return;
 		}

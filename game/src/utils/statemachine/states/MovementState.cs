@@ -3,6 +3,7 @@ using Godot;
 using Godot.Collections;
 
 public partial class MovementState : State {
+
 	[Export] protected BaseAIComp AIComp;
 	[Export] protected MovementComp MovementComponent;
 	[Export] public CollisionShape2D CollisionShape;

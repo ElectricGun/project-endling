@@ -4,7 +4,6 @@ using System;
 
 [GlobalClass]
 public partial class WalkingState : MovementState {
-
 	public float WalkingTime {get; private set;} = 0f;
 
 	public override void Enter() {
@@ -19,8 +18,11 @@ public partial class WalkingState : MovementState {
 	public override void PhysicsUpdate(double delta) {
 		base.PhysicsUpdate(delta);
 
-		if (Alive) {
-			MovementComponent.TryMoveX(AIComp.MoveDirX);
-		}		
+		bool IsWalking = AIComp.MoveDirX != 0;
+
+		MovementComponent.TryMoveX(AIComp.MoveDirX);
+		MovementComponent.TryJump(AIComp.IsJumping);
+		
+		if (!IsWalking) Transition(StateNames.IDLE_STATE);
 	}
 }

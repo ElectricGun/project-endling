@@ -33,7 +33,7 @@ public partial class State : Node {
 
 	// Runs upon entering
 	public virtual void Enter() {
-
+        Alive = true;
 		if (TransitionTime > 0 ) TransitionTimer.Start();
 
 	}
