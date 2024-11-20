@@ -7,7 +7,6 @@ public partial class MainMenu : Menu
 	public override void _Ready()
 	{
 		base._Ready();
-		myLabel.Text = "PROJECT ENDLING";
 	}
 	
 	public void OnButtonStartUp(){
