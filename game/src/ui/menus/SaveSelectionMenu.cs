@@ -10,14 +10,14 @@ public partial class SaveSelectionMenu : Menu
 	protected NewSaveButton CurrentNewSaveButton;
 
 	private void AddNewSaveButton() {
-		NewSaveButton Button = (NewSaveButton) SceneReferences.NEW_SAVE_BUTTON.Instantiate();
+		NewSaveButton Button = (NewSaveButton) ScenesPacked.NEW_SAVE_BUTTON.Instantiate();
 		GridContainer.AddChild(Button);
 		Button.Connect(BaseButton.SignalName.Pressed, Callable.From(OnButtonPressed));
 		}
 
 	private void AddLoadSaveButton(string PathToSaveFolder) {
 		PathToSaveFolder = ProjectSettings.GlobalizePath(PathToSaveFolder);
-		LoadSaveButton LoadButton = (LoadSaveButton) SceneReferences.LOAD_SAVE_BUTTON.Instantiate();
+		LoadSaveButton LoadButton = (LoadSaveButton) ScenesPacked.LOAD_SAVE_BUTTON.Instantiate();
 		LoadButton.Text = PathToSaveFolder.GetFile();
 		LoadButton.SaveLoaded += OnSaveLoaded;
 		LoadButton.LinkToSaveDirectory = PathToSaveFolder;

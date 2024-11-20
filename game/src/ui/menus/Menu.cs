@@ -5,13 +5,13 @@ public partial class Menu : Node2D
 	[Export] public CanvasLayer CanvasLayer;
 	public TransitionElement TransitionElement;
 	private Node TransitionToNode = null;
-	private PackedScene TransitionToScene = SceneReferences.MAIN_MENU;
+	private PackedScene TransitionToScene = ScenesPacked.MAIN_MENU;
 	private bool DoTransition = false;
 	private bool DoTransitionNode = false;
 
 	public override void _Ready()
 	{
-		TransitionElement = (TransitionElement) SceneReferences.TRANSITION_ELEMENT.Instantiate();
+		TransitionElement = (TransitionElement) ScenesPacked.TRANSITION_ELEMENT.Instantiate();
 		TransitionElement.Color = Colours.TransitionColour;
 		CanvasLayer.AddChild(TransitionElement);
 		TransitionElement.AnimPlayer.AnimationFinished += OnAnimationFinished; 

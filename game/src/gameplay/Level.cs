@@ -1,7 +1,7 @@
 using System;
 using Godot;
 using Godot.Collections;
-
+using utils;
 using static DictionaryKeys;
 [GlobalClass]
 public partial class Level : Menu
@@ -11,6 +11,8 @@ public partial class Level : Menu
 	[Export] public Node StaticObjectTree;
 	[Export] public Node HiddenObjectTree;
 	[Export] public PlayerCharacter PlayerCharacter;
+
+	public PauseMenu PauseMenu;
 
 	protected bool IsImportingData = false;
 	protected Dictionary SaveDataToImport;
@@ -30,14 +32,21 @@ public partial class Level : Menu
 				}
 			}
 		}
+
+		PauseMenu = (PauseMenu) ScenesPacked.PAUSE_MENU.Instantiate();
+		CanvasLayer.AddChild(PauseMenu);
+
+		PauseMenu.QuitButton.Connect(BaseButton.SignalName.Pressed, Callable.From(OnQuitButtonPressed));
+	}
+
+	protected void OnQuitButtonPressed() {
+		Transition(ScenesPacked.MAIN_MENU.Instantiate());
 	}
 
 	public void QueueImportData(Dictionary saveData) {
 		IsImportingData = true;
 		SaveDataToImport = saveData;
 	}
-
-	
 
 	protected void ImportData(Dictionary saveData) {
 		Dictionary LevelsDict = (Dictionary)saveData[KeySavedLevels];
@@ -78,13 +87,15 @@ public partial class Level : Menu
 	public Dictionary ExportData() {
 		Dictionary Data = SaveUtils.GenerateLevelDataTemplateDict();
 		Array<Node> SavedObjects = SavedObjectTree.GetChildren();
-
+		
 		foreach(Node mutableObject in SavedObjects) {
 			
 			if (mutableObject is LevelObject levelObject && levelObject.IsSaved) {
 				((Godot.Collections.Array)Data[KeyLevelObjects]).Add(levelObject.ExportData());
 			}
 		}
+
+		GD.Print("[Level.ExportData] Successfully exported level");
 		return Data;
 	}
 }

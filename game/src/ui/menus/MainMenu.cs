@@ -11,7 +11,7 @@ public partial class MainMenu : Menu
 	}
 	
 	public void OnButtonStartUp(){
-		Transition(SceneReferences.SAVE_SELECTION_MENU);
+		Transition(ScenesPacked.SAVE_SELECTION_MENU);
 	}
 	
 	public void OnButtonOptionsUp(){

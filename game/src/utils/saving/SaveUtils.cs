@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Godot;
 using Godot.Collections;
+using utils;
 using static DictionaryKeys;
 
 public class SaveUtils {
@@ -20,10 +21,6 @@ public class SaveUtils {
 			OutputName += "(1)";
 		}
 	}
-	public static void NewSave(string directory) {
-		NewSave("unnamed_game_save", directory);
-	}
-
 	public static Dictionary GenerateObjectDataTemplateDict() {
 		Dictionary PlayerData = new()
 		{
@@ -80,6 +77,10 @@ public class SaveUtils {
 		
 		return Data;
 	}
+
+	public static void NewSave(string directory) {
+		NewSave("unnamed_game_save", directory);
+	}
 	public static void NewSave(string name, string directory) {
 
 		name = GetUniqueName(name, directory);
@@ -98,10 +99,23 @@ public class SaveUtils {
 		GD.Print("[SaveUtils.NewSave] Save successfully created at : " + ProjectSettings.GlobalizePath(NewDirectory));
 	}
 
+	public static void OverwriteSave(string saveDirectory, Dictionary newSave) {
+        string JSON = Json.Stringify(newSave, indent: "	");
+
+		// initialise save file
+		Godot.FileAccess SaveFile = Godot.FileAccess.Open(saveDirectory.PathJoin("save.json"), Godot.FileAccess.ModeFlags.WriteRead);
+		SaveFile.StoreString(JSON);
+		SaveFile.Close();
+
+		GD.Print("[SaveUtils.OverwriteSave] saved to " + saveDirectory);	
+	}
+
 	public static Dictionary LoadSave(string LinkToSaveDirectory) {
 	    if (!Directory.Exists(LinkToSaveDirectory)) {
             throw new Exception ("[SaveUtils.LoadSave] Cannot load save at " + LinkToSaveDirectory + " Does not exist!");
         }
+
+		SessionData.LastLoadedSaveDirectory = LinkToSaveDirectory;
 
         return (Dictionary) Json.ParseString(File.ReadAllText(LinkToSaveDirectory.PathJoin("save.json")));
 	}
