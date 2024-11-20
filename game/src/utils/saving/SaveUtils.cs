@@ -26,9 +26,8 @@ public class SaveUtils {
 		{
 			{ KeyIsSpawned, false },
 			{ KeyNodePath , "" },
+			{ KeyPositionX, 0 },
 			{ KeyPositionY, 0 },
-			{ KeyVelocityX, 0 },
-			{ KeyVelocityY, 0 },
 			{ KeyNodeType, typeof(LevelObject).ToString()}
 		};
 
@@ -68,7 +67,7 @@ public class SaveUtils {
 		// master data
         Dictionary Data = new()
         {
-            { KeyRevision, SaveFileRevision },
+            { KeyFormatRevision, SaveFileRevision },
             { KeySaveName, saveName },
             { KeyCurrentLevel, 0 },
             { KeyPlayerData, GeneratePlayerDataTemplateDict()},
@@ -94,7 +93,6 @@ public class SaveUtils {
 		Godot.FileAccess SaveFile = Godot.FileAccess.Open(NewDirectory.PathJoin("save.json"), Godot.FileAccess.ModeFlags.WriteRead);
 		SaveFile.StoreString(JSON);
 		SaveFile.Close();
-
 
 		GD.Print("[SaveUtils.NewSave] Save successfully created at : " + ProjectSettings.GlobalizePath(NewDirectory));
 	}

@@ -5,10 +5,11 @@ using Godot.Collections;
 using static DictionaryKeys;
 
 [GlobalClass]
-public partial class LevelObject : Node2D
+public partial class LevelObject : Node2D, Saveable
 {
     [Export] public bool IsSpawned {get; private set;} = false;
     [Export] public bool IsSaved {get; private set;} = true;
+    public string PathToScene;
 
     public Dictionary ExportData() {
         Dictionary data = SaveUtils.GenerateObjectDataTemplateDict();
@@ -22,9 +23,19 @@ public partial class LevelObject : Node2D
         return data;
     }
     
-    public void ImportData(Dictionary data) {
-        GlobalPosition = new Vector2((float) data[KeyPositionX], (float) data[KeyPositionY]);
-        IsSpawned = (bool) data[KeyIsSpawned];
+    public void ImportData(Dictionary levelObjectData) {
+        GlobalPosition = new Vector2((float) levelObjectData[KeyPositionX], (float) levelObjectData[KeyPositionY]);
+        IsSpawned = (bool) levelObjectData[KeyIsSpawned];
         GD.Print("[LevelObject.ImportData] " + Name + " data imported!");
+    }
+
+    public bool GetIsSaved()
+    {
+        return IsSaved;
+    }
+
+    public void SetIsSaved(bool saved)
+    {
+        IsSaved = saved;
     }
 }

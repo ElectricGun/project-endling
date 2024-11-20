@@ -16,6 +16,7 @@ public partial class Menu : Node2D
 		CanvasLayer.AddChild(TransitionElement);
 		TransitionElement.AnimPlayer.AnimationFinished += OnAnimationFinished; 
 		TransitionElement.AnimPlayer.Play(TransitionElement.FADE_OUT);
+		GetTree().Paused = false;
 	}
 
 	public void OnAnimationFinished(StringName animationFinished) {
@@ -27,11 +28,13 @@ public partial class Menu : Node2D
 		}
 	}
 
+/* removed, causes issues
 	public void Transition(PackedScene packedScene) {
 		DoTransition = true;
 		TransitionToScene = packedScene;
 		TransitionElement.AnimPlayer.Play(TransitionElement.FADE_IN);
 	}
+	*/
 
 	public void Transition(Node node) {
 		DoTransitionNode = true;

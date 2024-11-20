@@ -8,13 +8,23 @@ public static class DictionaryKeys {
         KeyVelocityY = "velocityY",
         KeyCheckpoint= "checkpoint",
         KeyLevelObjects = "levelObjects",
-        KeyRevision  = "revision",
+        KeyFormatRevision  = "formatRevision",
         KeySaveName  = "saveName",
         KeyCurrentLevel = "currentLevel",
         KeyPlayerData = "playerData",
         KeySavedLevels = "savedLevels",
         KeyNodePath = "nodePath",
         KeyIsSpawned = "isSpawned",
-        KeyNodeType = "nodeType"
+        KeyNodeType = "nodeType",
+
+
+        // camera data
+        KeyCameraFollowObject = "cameraFollowObject",
+        KeyCameraLerpSpeed = "cameraLerpSpeed",
+
+        // state/statemachine
+        KeyStateNodeName = "stateNodeName",
+        KeyStateFlags = "stateFlags"
+
         ;
 }

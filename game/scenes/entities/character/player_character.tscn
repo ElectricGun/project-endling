@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://byipwp6ygdnhf"]
+[gd_scene load_steps=9 format=3 uid="uid://byipwp6ygdnhf"]
 
 [ext_resource type="Script" path="res://game/src/entities/character/PlayerCharacter.cs" id="1_gas2m"]
 [ext_resource type="Texture2D" uid="uid://d0f3vkgg0oj31" path="res://icon.svg" id="1_nvosf"]
 [ext_resource type="Script" path="res://game/src/components/physics/PhysicsComp.cs" id="3_ud2xk"]
 [ext_resource type="Script" path="res://game/src/components/controllers/UserControlComp.cs" id="4_paoe7"]
 [ext_resource type="Script" path="res://game/src/components/physics/MovementComp.cs" id="5_hlhxa"]
+[ext_resource type="Script" path="res://game/src/utils/statemachine/FiniteStateMachine.cs" id="6_2k0eq"]
+[ext_resource type="Script" path="res://game/src/utils/statemachine/states/PlayerWalkingState.cs" id="7_atnig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f8qi"]
 size = Vector2(48, 48)
@@ -39,10 +41,9 @@ fit_content = true
 [node name="UserControlComp" type="Node" parent="."]
 script = ExtResource("4_paoe7")
 
-[node name="MovementComp" type="Node2D" parent="." node_paths=PackedStringArray("PhysicsComponent", "AIComp", "DebugText")]
+[node name="MovementComp" type="Node2D" parent="." node_paths=PackedStringArray("PhysicsComponent", "DebugText")]
 script = ExtResource("5_hlhxa")
 PhysicsComponent = NodePath("../PhysicsComp")
-AIComp = NodePath("../UserControlComp")
 HorizontalSpeed = 350.0
 HorizontalLerpSpeed = 0.15
 JumpStrength = 500.0
@@ -56,4 +57,23 @@ offset_right = 475.0
 offset_bottom = -45.0
 bbcode_enabled = true
 text = "[b]MovementComp[/b]"
+fit_content = true
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("InitialState", "DebugText")]
+script = ExtResource("6_2k0eq")
+InitialState = NodePath("PlayerWalkingState")
+DebugText = NodePath("../StateDebug")
+
+[node name="PlayerWalkingState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("AIComp", "MovementComponent")]
+script = ExtResource("7_atnig")
+AIComp = NodePath("../../UserControlComp")
+MovementComponent = NodePath("../../MovementComp")
+
+[node name="StateDebug" type="RichTextLabel" parent="."]
+offset_left = -25.0
+offset_top = -137.0
+offset_right = 475.0
+offset_bottom = -45.0
+bbcode_enabled = true
+text = "[b]StateDebug[/b]"
 fit_content = true

@@ -30,13 +30,13 @@ public partial class PauseMenu : Control
 	
 
 	protected void Resume() {
-		//GetTree().Paused = false;
+		GetTree().Paused = false;
 		Visible = false;
 		IsPaused = false;
 	}
 
 	protected void Pause() {
-		//GetTree().Paused = true;
+		GetTree().Paused = true;
 		Visible = true;
 		IsPaused = true;
 	}
@@ -46,7 +46,7 @@ public partial class PauseMenu : Control
 	}
 
 	public void OnQuitButtonPressed() {
-		Resume();
+		//Resume();
 	}
 
 }

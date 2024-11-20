@@ -4,7 +4,7 @@ Current Save Schema (revision 2):
 
 saveName     : string
 revision     : int
-currentLevel : int
+currentLevel : string
 playerData : Dictionary {
     checkpoint : int
     positionX  : int
