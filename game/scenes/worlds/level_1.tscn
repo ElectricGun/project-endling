@@ -1051,6 +1051,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Label10" type="Label" parent="HiddenObjects"]
 anchors_preset = -1
+anchor_left = -0.205729
 anchor_right = -0.205729
 offset_left = 2392.0
 offset_top = -64.0
