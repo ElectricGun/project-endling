@@ -9,6 +9,7 @@ public static class ScenesPacked {
     // menus
     public static readonly PackedScene MAIN_MENU = GD.Load<PackedScene>("res://game/scenes/ui/menus/main_menu.tscn");
     public static readonly PackedScene SAVE_SELECTION_MENU = GD.Load<PackedScene>("res://game/scenes/ui/menus/save_selection_menu.tscn");
+    public static readonly PackedScene OPTIONS_MENU = GD.Load<PackedScene>("res://game/scenes/ui/menus/options_menu.tscn");
 
     //overlays
     public static readonly PackedScene PAUSE_MENU = GD.Load<PackedScene>("res://game/scenes/ui/overlays/pause_menu.tscn");
