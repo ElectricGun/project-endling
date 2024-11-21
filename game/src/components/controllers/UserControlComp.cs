@@ -10,4 +10,8 @@ public partial class UserControlComp : BaseAIComp
 		IsJumping = Input.IsActionPressed(InputNames.JUMP);
         EmitSignal(SignalName.ToggleRun);
     }
+
+    public bool IsMoving() {
+        return MoveDirX != 0;
+    }
 }

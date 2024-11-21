@@ -5,36 +5,40 @@ using System;
 using static DictionaryKeys;
 public partial class State : Node {
 
+	[Export] protected AnimationPlayer AnimationPlayer;
+	[Export] protected string AnimationName;
+
 	// Time for timer that plays upon entering the state
-	[Export] public float TransitionTime = 0;
+	//[Export] public float TransitionTime = 0;
 	// Time for timer that plays constantly while the state is active
-	[Export] public float CycleTime = 0;
+	//[Export] public float CycleTime = 0;
 	// Emit to change state
 	[Signal] public delegate void TransitionedEventHandler(State State, string NewState, Dictionary Flags);
 	// Unique state flags optionally set via signal
 	public Dictionary StateFlags;
 	public bool Alive {get; private set;} = true;
-	public Timer TransitionTimer = new();
-	public Timer CycleTimer = new();
+	//public Timer TransitionTimer = new();
+	//public Timer CycleTimer = new();
 
 	private bool ForceTransitioning;
 	private Dictionary ForceTransitionTo;
 
 	public override void _Ready() {
 
-		AddChild(TransitionTimer);
-		AddChild(CycleTimer);
+		//AddChild(TransitionTimer);
+		//AddChild(CycleTimer);
 
-		TransitionTimer.WaitTime = TransitionTime;
-		TransitionTimer.OneShot = true;
-		CycleTimer.WaitTime = CycleTime;
+		//TransitionTimer.WaitTime = TransitionTime;
+		//TransitionTimer.OneShot = true;
+		//CycleTimer.WaitTime = CycleTime;
 
 	}
 
 	// Runs upon entering
 	public virtual void Enter() {
         Alive = true;
-		if (TransitionTime > 0 ) TransitionTimer.Start();
+		//if (TransitionTime > 0 ) TransitionTimer.Start();
+		AnimationPlayer.Play(AnimationName);
 
 	}
 

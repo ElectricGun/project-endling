@@ -1,7 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://byipwp6ygdnhf"]
 
 [ext_resource type="Script" path="res://game/src/entities/character/PlayerCharacter.cs" id="1_gas2m"]
-[ext_resource type="Texture2D" uid="uid://d0f3vkgg0oj31" path="res://icon.svg" id="1_nvosf"]
 [ext_resource type="Script" path="res://game/src/components/physics/PhysicsComp.cs" id="3_ud2xk"]
 [ext_resource type="Script" path="res://game/src/components/controllers/UserControlComp.cs" id="4_paoe7"]
 [ext_resource type="Script" path="res://game/src/components/physics/MovementComp.cs" id="5_hlhxa"]
@@ -28,6 +27,23 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_lah2c"]
+resource_name = "idle"
+length = 1.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.7, 0.8, 0.9, 1, 1.3, 1.4, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0), Vector2i(9, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_i5xtr"]
 resource_name = "walk"
 length = 0.8
@@ -48,16 +64,17 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ie4yh"]
 _data = {
 "RESET": SubResource("Animation_trcmn"),
+"idle": SubResource("Animation_lah2c"),
 "walk": SubResource("Animation_i5xtr")
 }
 
-[node name="PlayerCharacter" type="CharacterBody2D"]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("PhysicsComp", "UserControlComp", "MovementComp", "FiniteStateMachine", "Sprite")]
 script = ExtResource("1_gas2m")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.384849, 0.384849)
-texture = ExtResource("1_nvosf")
+PhysicsComp = NodePath("PhysicsComp")
+UserControlComp = NodePath("UserControlComp")
+MovementComp = NodePath("MovementComp")
+FiniteStateMachine = NodePath("FiniteStateMachine")
+Sprite = NodePath("Sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7f8qi")
@@ -85,7 +102,8 @@ script = ExtResource("4_paoe7")
 [node name="MovementComp" type="Node2D" parent="." node_paths=PackedStringArray("PhysicsComponent", "DebugText")]
 script = ExtResource("5_hlhxa")
 PhysicsComponent = NodePath("../PhysicsComp")
-HorizontalSpeed = 350.0
+HorizontalSpeed = 200.0
+HorizontalSprintSpeed = 350.0
 HorizontalLerpSpeed = 0.15
 JumpStrength = 500.0
 DebugText = NodePath("MovementDebug")
@@ -105,18 +123,23 @@ script = ExtResource("6_2k0eq")
 InitialState = NodePath("IdleState")
 DebugText = NodePath("../StateDebug")
 
-[node name="WalkingState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("AIComp", "MovementComponent", "CollisionShape")]
+[node name="WalkingState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("AIComp", "MovementComponent", "CollisionShape", "AnimationPlayer")]
 script = ExtResource("7_5vn8c")
 AIComp = NodePath("../../UserControlComp")
 MovementComponent = NodePath("../../MovementComp")
 CollisionShape = NodePath("../../CollisionShape2D")
+AnimationPlayer = NodePath("../../AnimationPlayer")
+AnimationName = "walk"
 
-[node name="IdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("AIComp", "MovementComponent")]
+[node name="IdleState" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("AIComp", "MovementComponent", "AnimationPlayer")]
 script = ExtResource("8_vap2t")
 AIComp = NodePath("../../UserControlComp")
 MovementComponent = NodePath("../../MovementComp")
+AnimationPlayer = NodePath("../../AnimationPlayer")
+AnimationName = "idle"
 
 [node name="StateDebug" type="RichTextLabel" parent="."]
+visible = false
 offset_left = -25.0
 offset_top = -137.0
 offset_right = 475.0
@@ -125,16 +148,17 @@ bbcode_enabled = true
 text = "[b]StateDebug[/b]"
 fit_content = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, -5)
+scale = Vector2(1.45833, 1.45833)
 texture = ExtResource("9_ljgcu")
 hframes = 10
 vframes = 5
 frame = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D2")
+root_node = NodePath("../Sprite")
 libraries = {
 "": SubResource("AnimationLibrary_ie4yh")
 }
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+blend_times = [&"idle", &"walk", 0.1, &"walk", &"idle", 0.1]

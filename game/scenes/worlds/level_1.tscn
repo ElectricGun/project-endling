@@ -939,6 +939,7 @@ texture = ExtResource("3_w6yah")
 
 [node name="FollowCamera" type="Camera2D" parent="SavedObjects" node_paths=PackedStringArray("FollowObject")]
 position = Vector2(-2, 8)
+zoom = Vector2(1.2, 1.2)
 script = ExtResource("4_kumby")
 FollowObject = NodePath("../../PlayerCharacter")
 LerpSpeed = 0.02

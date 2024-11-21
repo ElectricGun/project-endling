@@ -6,6 +6,8 @@ public partial class MovementComp : BaseComp
 {
 	[Export] public PhysicsComp PhysicsComponent;
 	[Export] public float HorizontalSpeed = 1;
+	[Export] public float HorizontalSprintSpeed = 1;
+
 	[Export] public float HorizontalLerpSpeed = 1;
 	[Export] public float JumpStrength = 1000; 
 	[Export] public int MaxJumps = 2;

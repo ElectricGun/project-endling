@@ -42,6 +42,7 @@ tile_map_data = PackedByteArray("AAABAAQAAAAAAAEAAAACAAQAAAAAAAAAAAACAAUAAAAAAAA
 tile_set = SubResource("TileSet_7ec01")
 
 [node name="FollowCamera" type="Camera2D" parent="." node_paths=PackedStringArray("FollowObject")]
+zoom = Vector2(1.3, 1.3)
 script = ExtResource("3_htosn")
 FollowObject = NodePath("../PlayerCharacter")
 LerpSpeed = 0.02

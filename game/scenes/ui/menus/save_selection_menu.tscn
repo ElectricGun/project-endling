@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" path="res://game/src/ui/menus/SaveSelectionMenu.cs" id="1_wkgy8"]
 
-[node name="SaveSelectionMenu" type="Node2D" node_paths=PackedStringArray("GridContainer", "CanvasLayer")]
+[node name="SaveSelectionMenu" type="Node2D" node_paths=PackedStringArray("BackButton", "GridContainer", "CanvasLayer")]
 script = ExtResource("1_wkgy8")
-GridContainer = NodePath("CanvasLayer/Control/GridContainer")
+BackButton = NodePath("CanvasLayer/BackButton")
+GridContainer = NodePath("CanvasLayer/Control/VBoxContainer")
 CanvasLayer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -17,14 +18,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 16.0
+offset_left = 105.0
+offset_top = -20.0
+offset_right = 145.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
 offset_top = -32.0
-offset_right = 80.0
+offset_right = 60.0
 offset_bottom = 32.0
 grow_vertical = 2
-size_flags_horizontal = 4
+text = "<"
