@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://game/src/ui/menus/MainMenu.cs" id="1_a281r"]
 [ext_resource type="Texture2D" uid="uid://ciwgsq3f5co4s" path="res://game/assets/images/project-endling-logo.png" id="2_twq1t"]
 
-[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("myLabel", "CanvasLayer")]
+[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("CanvasLayer")]
 process_mode = 3
 script = ExtResource("1_a281r")
-myLabel = NodePath("")
 CanvasLayer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
