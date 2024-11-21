@@ -2,11 +2,17 @@ using Godot;
 using System;
 
 public partial class MainMenu : Menu
-{
-	[Export] public Label myLabel;
+{	
+	[Export] public Button StartButton;
+	[Export] public Button SettingsButton;
+	[Export] public Button QuitButton;
 	public override void _Ready()
 	{
 		base._Ready();
+		StartButton.Connect(Button.SignalName.Pressed, Callable.From(OnButtonStartUp));
+		SettingsButton.Connect(Button.SignalName.Pressed, Callable.From(OnButtonOptionsUp));
+		QuitButton.Connect(Button.SignalName.Pressed, Callable.From(OnButtonQuitUp));
+
 	}
 	
 	public void OnButtonStartUp(){
@@ -14,7 +20,7 @@ public partial class MainMenu : Menu
 	}
 	
 	public void OnButtonOptionsUp(){
-		myLabel.Text = "opening the options menu";
+		Transition(ScenesPacked.OPTIONS_MENU.Instantiate());
 	}
 	
 	public void OnButtonQuitUp(){

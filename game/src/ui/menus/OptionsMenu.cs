@@ -1,10 +1,15 @@
 using Godot;
 using System;
 
-public partial class OptionsMenu : Node
+public partial class OptionsMenu : Menu
 {
+	[Export] public Button BackButton;
 	public override void _Ready()
 	{
+		base._Ready();
+
+		BackButton.Connect(Button.SignalName.Pressed, Callable.From(BackToMainMenu));
+		
  		var windowSizeDropdown = GetNode<OptionButton>("CanvasLayer/Control/WindowSizeDropDown");
 		windowSizeDropdown.AddItem("1920x1080"); // Index 0
 		windowSizeDropdown.AddItem("1280x720");  // Index 1
@@ -18,6 +23,10 @@ public partial class OptionsMenu : Node
 			windowSizeDropdown.Select(1);
 		else if (currentSize == new Vector2I(1024, 768))
 			windowSizeDropdown.Select(2);
+	}
+
+	private void BackToMainMenu() {
+		Transition(ScenesPacked.MAIN_MENU.Instantiate());
 	}
 
 	private void _on_window_size_drop_down_item_selected(int index)
