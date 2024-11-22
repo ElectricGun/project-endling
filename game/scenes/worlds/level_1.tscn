@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=4 uid="uid://dwb5ghhml2k8v"]
+[gd_scene load_steps=28 format=4 uid="uid://dwb5ghhml2k8v"]
 
 [ext_resource type="Script" path="res://game/src/gameplay/Level.cs" id="1_8wj17"]
+[ext_resource type="Material" uid="uid://djknm5oinaoal" path="res://game/resources/materials/screen_grayscale.tres" id="2_3wo41"]
 [ext_resource type="PackedScene" uid="uid://byipwp6ygdnhf" path="res://game/scenes/entities/character/player_character.tscn" id="2_blpnf"]
 [ext_resource type="Texture2D" uid="uid://d0f3vkgg0oj31" path="res://icon.svg" id="3_w6yah"]
 [ext_resource type="Texture2D" uid="uid://cwhyxn2k7q61g" path="res://game/assets/tilemaps/sand_tileset_1.png" id="4_10wjf"]
@@ -805,7 +806,7 @@ SavedObjectTree = NodePath("SavedObjects")
 StaticObjectTree = NodePath("StaticObjects")
 HiddenObjectTree = NodePath("HiddenObjects")
 PlayerCharacter = NodePath("PlayerCharacter")
-CanvasLayer = NodePath("CanvasLayer")
+CanvasLayer = NodePath("UI")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_blpnf")]
 position = Vector2(7448, -208)
@@ -835,7 +836,7 @@ texture = ExtResource("6_14dxh")
 material = SubResource("ShaderMaterial_ygd1p")
 position = Vector2(0, -408)
 motion_scale = Vector2(0, 0.01)
-motion_mirroring = Vector2(1442, 0)
+motion_mirroring = Vector2(1150, 0)
 
 [node name="DesertLayer2" type="Sprite2D" parent="Background/ParallaxLayer6"]
 use_parent_material = true
@@ -854,7 +855,7 @@ material = SubResource("ShaderMaterial_wv7kg")
 position = Vector2(0, -408)
 motion_scale = Vector2(0.1, 0.05)
 motion_offset = Vector2(250, 0)
-motion_mirroring = Vector2(1149, 0)
+motion_mirroring = Vector2(1150, 0)
 
 [node name="DesertLayer1" type="Sprite2D" parent="Background/ParallaxLayer5"]
 use_parent_material = true
@@ -866,20 +867,20 @@ texture = ExtResource("8_0jmpd")
 material = SubResource("ShaderMaterial_5jtvi")
 position = Vector2(-16, -408)
 motion_scale = Vector2(0.2, 0.3)
-motion_mirroring = Vector2(1442, 0)
+motion_mirroring = Vector2(1150, 0)
 
-[node name="DesertLayer1" type="Sprite2D" parent="Background/ParallaxLayer4"]
+[node name="DesertLayer2" type="Sprite2D" parent="Background/ParallaxLayer4"]
 use_parent_material = true
-position = Vector2(722, 576)
-scale = Vector2(3.00694, 3.01389)
-texture = ExtResource("8_0jmpd")
+position = Vector2(576, 688)
+scale = Vector2(2.3963, 2.3963)
+texture = ExtResource("7_8ju4x")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="Background"]
 material = SubResource("ShaderMaterial_c4fp4")
 position = Vector2(0, -408)
 motion_scale = Vector2(0.4, 0.6)
 motion_offset = Vector2(250, 0)
-motion_mirroring = Vector2(1149, 0)
+motion_mirroring = Vector2(1150, 0)
 
 [node name="DesertLayer1" type="Sprite2D" parent="Background/ParallaxLayer3"]
 use_parent_material = true
@@ -891,7 +892,7 @@ texture = ExtResource("8_0jmpd")
 material = SubResource("ShaderMaterial_kphge")
 position = Vector2(0, -464)
 motion_scale = Vector2(0.6, 0.8)
-motion_mirroring = Vector2(1150.11, 0)
+motion_mirroring = Vector2(1150, 0)
 
 [node name="DesertLayer2" type="Sprite2D" parent="Background/ParallaxLayer2"]
 use_parent_material = true
@@ -903,7 +904,7 @@ texture = ExtResource("7_8ju4x")
 material = SubResource("ShaderMaterial_8rqic")
 position = Vector2(0, -408)
 motion_scale = Vector2(0.8, 1)
-motion_mirroring = Vector2(1149, 0)
+motion_mirroring = Vector2(1150, 0)
 
 [node name="DesertLayer1" type="Sprite2D" parent="Background/ParallaxLayer1"]
 material = SubResource("ShaderMaterial_7ufag")
@@ -912,7 +913,18 @@ position = Vector2(575.111, 528)
 scale = Vector2(2.3963, 2.3963)
 texture = ExtResource("8_0jmpd")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Shader" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Shader"]
+material = ExtResource("2_3wo41")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StaticObjects" type="Node" parent="."]
 

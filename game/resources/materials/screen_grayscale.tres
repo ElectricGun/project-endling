@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://djknm5oinaoal"]
+
+[ext_resource type="Shader" path="res://game/shaders/screenwide/screen_grayscale.gdshader" id="1_ik281"]
+
+[resource]
+shader = ExtResource("1_ik281")
+shader_parameter/strength = 0.2

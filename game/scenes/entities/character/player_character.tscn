@@ -155,8 +155,8 @@ text = "[b]StateDebug[/b]"
 fit_content = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-4.76837e-07, -5)
-scale = Vector2(1.45833, 1.45833)
+position = Vector2(1.90735e-06, -17.5)
+scale = Vector2(1.97917, 1.97917)
 texture = ExtResource("9_ljgcu")
 hframes = 10
 vframes = 5
