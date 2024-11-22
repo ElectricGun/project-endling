@@ -104,6 +104,8 @@ public partial class Level : Menu
 				}
 			}
 			GD.Print("[Level.ImportData] Successfully imported level");
+		} {
+			if (InitialSpawnPoint != null) PlayerCharacter.GlobalPosition = InitialSpawnPoint.GlobalPosition;
 		}
 	}
 
