@@ -21,20 +21,20 @@ public partial class Menu : Node2D
 
 	public void OnAnimationFinished(StringName animationFinished) {
 		if (DoTransition) 
-			GetTree().ChangeSceneToPacked(TransitionToScene);
+			GetTree().Root.AddChild(TransitionToScene.Instantiate());
 		if (DoTransitionNode) {
 			QueueFree();
 			GetTree().Root.AddChild(TransitionToNode);
 		}
 	}
 
-/* removed, causes issues
+
 	public void Transition(PackedScene packedScene) {
 		DoTransition = true;
 		TransitionToScene = packedScene;
 		TransitionElement.AnimPlayer.Play(TransitionElement.FADE_IN);
 	}
-	*/
+	
 
 	public void Transition(Node node) {
 		DoTransitionNode = true;

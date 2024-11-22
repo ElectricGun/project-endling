@@ -7,7 +7,7 @@ using static DictionaryKeys;
 
 public class SaveUtils {
 
-	// add 1 to revision when you are changing the data schema of save files
+	// add 2 to revision when you are changing the data schema of save files
 	public static int SaveFileRevision {get; private set;} = 1;
 
 	protected static string GetUniqueName(string name, string directory) {
@@ -22,7 +22,7 @@ public class SaveUtils {
 		}
 	}
 	public static Dictionary GenerateObjectDataTemplateDict() {
-		Dictionary PlayerData = new()
+		Dictionary ObjectData = new()
 		{
 			{ KeyIsSpawned, false },
 			{ KeyNodePath , "" },
@@ -31,7 +31,7 @@ public class SaveUtils {
 			{ KeyNodeType, typeof(LevelObject).ToString()}
 		};
 
-		return PlayerData;
+		return ObjectData;
 	}
 
 	public static Dictionary GeneratePlayerDataTemplateDict() {
@@ -51,6 +51,7 @@ public class SaveUtils {
 		// create starting level with empty object data
 		Dictionary WorldData = new()
 		{
+			{ KeyPlayerData, GeneratePlayerDataTemplateDict()},
 			{ KeyLevelObjects, new Godot.Collections.Array() }
 		};
 		return WorldData;
@@ -70,7 +71,6 @@ public class SaveUtils {
             { KeyFormatRevision, SaveFileRevision },
             { KeySaveName, saveName },
             { KeyCurrentLevel, 0 },
-            { KeyPlayerData, GeneratePlayerDataTemplateDict()},
             { KeySavedLevels, Levels }
         };
 		

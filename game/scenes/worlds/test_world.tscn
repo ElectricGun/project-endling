@@ -26,11 +26,8 @@ sources/0 = SubResource("TileSetAtlasSource_t448m")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ea5sp"]
 size = Vector2(230, 20)
 
-[node name="TestWorld" type="Node2D" node_paths=PackedStringArray("SavedObjectTree", "PlayerCharacter", "CanvasLayer")]
+[node name="TestWorld" type="Node2D"]
 script = ExtResource("1_xs60i")
-SavedObjectTree = NodePath("SavedObjects")
-PlayerCharacter = NodePath("PlayerCharacter")
-CanvasLayer = NodePath("CanvasLayer")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_u4dg0")]
 position = Vector2(456, 129)

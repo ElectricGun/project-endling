@@ -8,7 +8,8 @@ public partial class UserControlComp : BaseAIComp
     {
         MoveDirX = (Input.IsActionPressed(InputNames.LEFT) ? -1 : 0) + (Input.IsActionPressed(InputNames.RIGHT) ? 1 : 0);
 		IsJumping = Input.IsActionPressed(InputNames.JUMP);
-        EmitSignal(SignalName.ToggleRun);
+        if (Input.IsActionJustPressed(InputNames.RUN)) EmitSignal(SignalName.ToggleRun);
+        if (Input.IsActionJustPressed(InputNames.INTERACT)) EmitSignal(SignalName.Interact);
     }
 
     public bool IsMoving() {

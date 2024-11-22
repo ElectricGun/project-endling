@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dwb5ghhml2k8v"]
+[gd_scene load_steps=16 format=4 uid="uid://dwb5ghhml2k8v"]
 
 [ext_resource type="Script" path="res://game/src/gameplay/Level.cs" id="1_8wj17"]
 [ext_resource type="PackedScene" uid="uid://byipwp6ygdnhf" path="res://game/scenes/entities/character/player_character.tscn" id="2_blpnf"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://boch0skeb3s4l" path="res://game/assets/tilemaps/dirt_tileset_1.png" id="4_bb2nb"]
 [ext_resource type="Script" path="res://game/src/utils/FollowCamera.cs" id="4_kumby"]
 [ext_resource type="Script" path="res://game/src/gameplay/levelobjects/Platform.cs" id="7_gcv3s"]
+[ext_resource type="Script" path="res://game/src/gameplay/levelobjects/InteractiveObject.cs" id="8_6l1cu"]
+[ext_resource type="Script" path="res://game/src/components/areas/InteractableArea2D.cs" id="9_tay8f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x1ysg"]
 texture = ExtResource("3_w6yah")
@@ -752,9 +754,15 @@ sources/1 = SubResource("TileSetAtlasSource_chhy5")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bi0xy"]
 size = Vector2(128, 32)
 
-[node name="Level1" type="Node2D" node_paths=PackedStringArray("SavedObjectTree", "HiddenObjectTree", "PlayerCharacter", "CanvasLayer")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wadeq"]
+radius = 40.0
+
+[node name="Level1" type="Node2D" node_paths=PackedStringArray("InitialSpawnPoint", "SavedObjectTree", "StaticObjectTree", "HiddenObjectTree", "PlayerCharacter", "CanvasLayer")]
 script = ExtResource("1_8wj17")
+InitialSpawnPoint = NodePath("HiddenObjects/InitialSpawnPoint")
+LevelID = "0"
 SavedObjectTree = NodePath("SavedObjects")
+StaticObjectTree = NodePath("StaticObjects")
 HiddenObjectTree = NodePath("HiddenObjects")
 PlayerCharacter = NodePath("PlayerCharacter")
 CanvasLayer = NodePath("CanvasLayer")
@@ -939,10 +947,37 @@ texture = ExtResource("3_w6yah")
 
 [node name="FollowCamera" type="Camera2D" parent="SavedObjects" node_paths=PackedStringArray("FollowObject")]
 position = Vector2(-2, 8)
+offset = Vector2(0, -100)
 zoom = Vector2(1.2, 1.2)
 script = ExtResource("4_kumby")
 FollowObject = NodePath("../../PlayerCharacter")
 LerpSpeed = 0.02
+
+[node name="InteractiveObject" type="Node2D" parent="SavedObjects"]
+position = Vector2(408, 32)
+script = ExtResource("8_6l1cu")
+
+[node name="InteractableArea2D" type="Area2D" parent="SavedObjects/InteractiveObject" node_paths=PackedStringArray("_InteractiveObject")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("9_tay8f")
+_InteractiveObject = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SavedObjects/InteractiveObject/InteractableArea2D"]
+shape = SubResource("CircleShape2D_wadeq")
+
+[node name="InteractiveObject2" type="Node2D" parent="SavedObjects"]
+position = Vector2(520, 56)
+script = ExtResource("8_6l1cu")
+
+[node name="InteractableArea2D" type="Area2D" parent="SavedObjects/InteractiveObject2" node_paths=PackedStringArray("_InteractiveObject")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("9_tay8f")
+_InteractiveObject = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SavedObjects/InteractiveObject2/InteractableArea2D"]
+shape = SubResource("CircleShape2D_wadeq")
 
 [node name="HiddenObjects" type="Node" parent="."]
 
@@ -1061,6 +1096,12 @@ offset_bottom = -41.0
 scale = Vector2(2.5924, 2.5924)
 text = "Teach player how to move, jump and walljump here"
 metadata/_edit_use_anchors_ = true
+
+[node name="InitialSpawnPoint" type="Node2D" parent="HiddenObjects"]
+
+[node name="Sprite2D" type="Sprite2D" parent="HiddenObjects/InitialSpawnPoint"]
+position = Vector2(-152, -4)
+texture = ExtResource("3_w6yah")
 
 [node name="JumpTutorial" type="Label" parent="."]
 offset_left = 1493.0

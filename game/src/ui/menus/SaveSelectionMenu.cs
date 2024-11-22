@@ -39,7 +39,6 @@ public partial class SaveSelectionMenu : Menu
 	public void OnSaveLoaded(Dictionary saveData) {		
 		string CurrentLevelID = (string) saveData[KeyCurrentLevel];
 		Level CurrentLevel = (Level) Levels.LevelMapping[CurrentLevelID].Instantiate();
-		CurrentLevel.LevelID = CurrentLevelID;
 		CurrentLevel.QueueImportData(saveData);
 		Transition(CurrentLevel);
 	}

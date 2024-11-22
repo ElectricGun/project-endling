@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://byipwp6ygdnhf"]
+[gd_scene load_steps=17 format=3 uid="uid://byipwp6ygdnhf"]
 
 [ext_resource type="Script" path="res://game/src/entities/character/PlayerCharacter.cs" id="1_gas2m"]
 [ext_resource type="Script" path="res://game/src/components/physics/PhysicsComp.cs" id="3_ud2xk"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://game/src/utils/statemachine/states/WalkingState.cs" id="7_5vn8c"]
 [ext_resource type="Script" path="res://game/src/utils/statemachine/states/IdleState.cs" id="8_vap2t"]
 [ext_resource type="Texture2D" uid="uid://duyt2owiai6f6" path="res://game/assets/sprites/animated/cat_sprite_frames.png" id="9_ljgcu"]
+[ext_resource type="Script" path="res://game/src/components/utils/Interactor.cs" id="9_qccv7"]
+[ext_resource type="Texture2D" uid="uid://d0f3vkgg0oj31" path="res://icon.svg" id="10_2ygej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f8qi"]
 size = Vector2(48, 48)
@@ -68,7 +70,11 @@ _data = {
 "walk": SubResource("Animation_i5xtr")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_onbkh"]
+radius = 86.0523
+
 [node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("PhysicsComp", "UserControlComp", "MovementComp", "FiniteStateMachine", "Sprite")]
+physics_interpolation_mode = 1
 script = ExtResource("1_gas2m")
 PhysicsComp = NodePath("PhysicsComp")
 UserControlComp = NodePath("UserControlComp")
@@ -162,3 +168,24 @@ libraries = {
 "": SubResource("AnimationLibrary_ie4yh")
 }
 blend_times = [&"idle", &"walk", 0.1, &"walk", &"idle", 0.1]
+
+[node name="Interactor" type="Node2D" parent="." node_paths=PackedStringArray("Player", "InputComp", "InteractionArea", "InteractionPopup")]
+script = ExtResource("9_qccv7")
+Player = NodePath("..")
+InputComp = NodePath("../UserControlComp")
+InteractionArea = NodePath("Area2D")
+InteractionPopup = NodePath("../Sprite2D")
+Enabled = true
+DebugMode = true
+
+[node name="Area2D" type="Area2D" parent="Interactor"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor/Area2D"]
+shape = SubResource("CircleShape2D_onbkh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -137)
+scale = Vector2(0.546875, 0.546875)
+texture = ExtResource("10_2ygej")
