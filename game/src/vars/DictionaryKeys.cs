@@ -2,20 +2,26 @@ using System.Reflection.Metadata;
 
 public static class DictionaryKeys {
     public const string 
+        // global
+        KeyFormatRevision  = "formatRevision",
+        KeyCurrentLevel = "currentLevel",
+        KeySavedLevels = "savedLevels",
+        KeyUnlockedWords = "unlockedWords",
+
+        // objectdata
         KeyPositionX = "positionX",
         KeyPositionY = "positionY",
         KeyVelocityX = "velocityX",
         KeyVelocityY = "velocityY",
         KeyCheckpoint= "checkpoint",
-        KeyLevelObjects = "levelObjects",
-        KeyFormatRevision  = "formatRevision",
-        KeySaveName  = "saveName",
-        KeyCurrentLevel = "currentLevel",
-        KeyPlayerData = "playerData",
-        KeySavedLevels = "savedLevels",
         KeyNodePath = "nodePath",
-        KeyIsSpawned = "isSpawned",
         KeyNodeType = "nodeType",
+        KeyIsSpawned = "isSpawned",
+
+        // leveldata
+        KeyLevelObjects = "levelObjects",
+        KeySaveName  = "saveName",
+        KeyPlayerData = "playerData",
 
 
         // camera data

@@ -6,6 +6,8 @@ public static class StateNames {
     WALKING_STATE = "WalkingState",
     IDLE_STATE = "IdleState",
     STATE = "State",
-    MOVEMENT_STATE = "MovementState"
+    MOVEMENT_STATE = "MovementState",
+    RUNNING_STATE = "RunningState",
+    MIDAIR_STATE = "MidairState"
     ;
 }

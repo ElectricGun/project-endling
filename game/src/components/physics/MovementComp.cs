@@ -4,6 +4,7 @@ using System;
 [GlobalClass]
 public partial class MovementComp : BaseComp
 {
+	//[Export] public BaseAIComp BaseAIComp;
 	[Export] public PhysicsComp PhysicsComponent;
 	[Export] public float HorizontalSpeed = 1;
 	[Export] public float HorizontalSprintSpeed = 1;
@@ -16,20 +17,34 @@ public partial class MovementComp : BaseComp
 	public bool CanJump {get; protected set;} = true;
 	public bool IsAlreadyJumped {get; private set;} = false;
 	public bool IsAlreadyMidair  {get; private set;} = false;
+	protected bool DoToggleIsRunning = false;
 
-
-	public override void _PhysicsProcess(double delta) 
+    public override void _PhysicsProcess(double delta) 
 	{
 		PrintDebugLabel("MovementComp",
 							"JumpCounter: " + JumpCounter + "\n" +
 							"AlreadyJumped: " + IsAlreadyJumped + "\n" +
 							"AlreadyMidair: " + IsAlreadyMidair);
+		
+		if (DoToggleIsRunning) {
+			DoToggleIsRunning = false;
+			IsRunning = !IsRunning;
+		}
 	}
 
-	public bool TryMoveX(int moveDirX) {
+	public override void _Ready() {
+		base._Ready();
+		//BaseAIComp?.Connect(BaseAIComp.SignalName.ToggleRun, Callable.From(ToggleSprint));
+	}
+
+    public void ToggleSprint() {
+		DoToggleIsRunning = true;
+	}
+
+	public bool TryMoveX(int moveDirX, bool sprint = false) {
 		// horizontal movement
 		float StartVelocityX = PhysicsComponent.PhysicsObject.Velocity.X;
-		float TargetVelocityX = moveDirX * HorizontalSpeed;
+		float TargetVelocityX = moveDirX * (sprint ? HorizontalSprintSpeed : HorizontalSpeed);
 		float LerpedVelocity = Mathf.Lerp(StartVelocityX, TargetVelocityX, HorizontalLerpSpeed);
 		PhysicsComponent.MoveX(LerpedVelocity);
 		return moveDirX != 0;

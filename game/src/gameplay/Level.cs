@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using Godot;
 using Godot.Collections;
 using utils;
@@ -13,6 +14,9 @@ public partial class Level : Menu
 	[Export] public Node HiddenObjectTree;
 	[Export] public PlayerCharacter PlayerCharacter;
 
+	[Export] public ColorRect ScreenGrayscaleRect;
+	[Export] public ColorRect ScreenBlurRect;
+
 	public PauseMenu PauseMenu;
 
 	protected bool IsImportingData = false;
@@ -20,9 +24,10 @@ public partial class Level : Menu
 
 	public override void _Ready()
 	{
+		base._Ready();
 		if (!Engine.IsEditorHint()) { 
 
-			base._Ready();
+			UpdateShaders();
 
 			PauseMenu = (PauseMenu) ScenesPacked.PAUSE_MENU.Instantiate();
 			CanvasLayer.AddChild(PauseMenu);
@@ -45,6 +50,18 @@ public partial class Level : Menu
 				}
 			}
 		}
+	}
+
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+	}
+
+	public void UpdateShaders() {
+			// set grayscale based on "colour" word unlock
+			if (ScreenGrayscaleRect.Material is ShaderMaterial shaderMaterial) {
+				shaderMaterial.SetShaderParameter("strength", SessionData.UnlockedWords.Contains("colour") ? 0 : .825);
+			}
 	}
 
 	protected void OnQuitButtonPressed() {
@@ -104,7 +121,8 @@ public partial class Level : Menu
 				}
 			}
 			GD.Print("[Level.ImportData] Successfully imported level");
-		} {
+		}  else
+		{
 			if (InitialSpawnPoint != null) PlayerCharacter.GlobalPosition = InitialSpawnPoint.GlobalPosition;
 		}
 	}

@@ -6,6 +6,8 @@ saveName     : string
 revision     : int
 currentLevel : string
 
+unlockedWords : Array
+
 savedLevels : Dictionary {
     playerData : Dictionary {
         checkpoint : int

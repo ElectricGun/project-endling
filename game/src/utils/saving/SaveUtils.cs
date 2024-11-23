@@ -8,7 +8,7 @@ using static DictionaryKeys;
 public class SaveUtils {
 
 	// add 2 to revision when you are changing the data schema of save files
-	public static int SaveFileRevision {get; private set;} = 1;
+	public static int SaveFileRevision {get; private set;} = 2;
 
 	protected static string GetUniqueName(string name, string directory) {
 		
@@ -98,6 +98,14 @@ public class SaveUtils {
 	}
 
 	public static void OverwriteSave(string saveDirectory, Dictionary newSave) {
+		
+		// save sessiondata
+		if (!newSave.ContainsKey(KeyUnlockedWords)) {
+			newSave.Add(KeyUnlockedWords, new Godot.Collections.Array());
+		}
+		
+		newSave[KeyUnlockedWords] = SessionData.UnlockedWords;
+
         string JSON = Json.Stringify(newSave, indent: "	");
 
 		// initialise save file
@@ -112,10 +120,14 @@ public class SaveUtils {
 	    if (!Directory.Exists(LinkToSaveDirectory)) {
             throw new Exception ("[SaveUtils.LoadSave] Cannot load save at " + LinkToSaveDirectory + " Does not exist!");
         }
-
+		Dictionary Out = (Dictionary) Json.ParseString(File.ReadAllText(LinkToSaveDirectory.PathJoin("save.json")));
 		SessionData.LastLoadedSaveDirectory = LinkToSaveDirectory;
+		if (!Out.ContainsKey(KeyUnlockedWords)) {
+			Out.Add(KeyUnlockedWords, new Godot.Collections.Array());
+		}
+		SessionData.UnlockedWords = (Godot.Collections.Array) Out[KeyUnlockedWords];
 
-        return (Dictionary) Json.ParseString(File.ReadAllText(LinkToSaveDirectory.PathJoin("save.json")));
+        return Out;
 	}
 
 

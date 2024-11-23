@@ -7,26 +7,7 @@ public partial class MovementState : State {
 	[Export] protected BaseAIComp AIComp;
 	[Export] protected MovementComp MovementComponent;
 	[Export] public CollisionShape2D CollisionShape;
-	//[Export] public InstantCast2D WallHeightCast;
-	//[Export] public InstantCast2D WallStepCheckCast;
-	//[Export] public InstantCast2D ClimbingRaycast;
-	/*
-	private bool _DoUpdateDirection = true;
-	public bool DoUpdateDirection
-	{
-		get
-		{
-			return _DoUpdateDirection;
-		}
-		set
-		{
-			UserInputComponent.UpdateLastMoveDir = value;
-			_DoUpdateDirection = value;
-		}
-	}
-	public bool DoUpdateDrag = true;
-	public bool DoUpdateGravity = true;
-	*/
+	public InstantCast2D InstantCast2D {get; private set;}
 
 	public override void Enter() {
 		base.Enter();
@@ -36,19 +17,9 @@ public partial class MovementState : State {
 	public override void Exit() {
 		base.Exit();
 	}
-
-    public override void _Ready()
-    {
-        base._Ready();
-		
-		//UserInputComponent.UserUnhandledInput += OnUserUnhandeledInput;
-    }
-
 	private void OnUserUnhandeledInput(InputEvent input) {
 		if (input is InputEventKey inputEventKey) {
-			//if (inputEventKey.IsActionPressed()) {
 
-			//}
 		}
 	}
 
@@ -62,4 +33,19 @@ public partial class MovementState : State {
 		
 		base.PhysicsUpdate(delta);
 	}
+
+	public override void _Ready()
+    {
+        base._Ready();
+
+		InstantCast2D = new InstantCast2D();
+		AddChild(InstantCast2D);
+		
+		AIComp.Connect(BaseAIComp.SignalName.ToggleRun, Callable.From(ToggleRun));
+    }
+
+	protected void ToggleRun()
+    {
+		MovementComponent.ToggleSprint();
+    }
 }

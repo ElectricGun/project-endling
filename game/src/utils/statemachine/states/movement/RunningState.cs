@@ -3,7 +3,7 @@ using Godot.Collections;
 using System;
 
 [GlobalClass]
-public partial class WalkingState : MovementState {
+public partial class RunningState : MovementState {
 	public float WalkingTime {get; private set;} = 0f;
 
 	public override void Enter() {
@@ -20,9 +20,14 @@ public partial class WalkingState : MovementState {
 
 		bool IsWalking = AIComp.MoveDirX != 0;
 
-		MovementComponent.TryMoveX(AIComp.MoveDirX);
+		MovementComponent.TryMoveX(AIComp.MoveDirX, true);
 		MovementComponent.TryJump(AIComp.IsJumping);
 		
-		if (!IsWalking) Transition(StateNames.IDLE_STATE);
+		if (!MovementComponent.IsAlreadyMidair) {
+			if (!IsWalking) Transition(StateNames.IDLE_STATE);
+			if (!MovementComponent.IsRunning) Transition(StateNames.WALKING_STATE);
+		} else {
+			Transition(StateNames.MIDAIR_STATE);
+		}
 	}
 }
