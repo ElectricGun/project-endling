@@ -12,7 +12,7 @@ void fragment() {
                     texture(TEXTURE, UV - vec2(blur_radius.x, 0.0) * blur_strength) +
                     texture(TEXTURE, UV + vec2(0.0, blur_radius.y) * blur_strength) +
                     texture(TEXTURE, UV - vec2(0.0, blur_radius.y) * blur_strength);
-    
+
     vec4 blurred_colour = blur_sum / 5.0;
 
 	COLOR = mix(blurred_colour, vec4(mix_colour.r, mix_colour.g, mix_colour.b, min(blurred_colour.a, mix_colour.a)), colour_mix_strength);
