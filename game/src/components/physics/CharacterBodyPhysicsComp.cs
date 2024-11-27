@@ -1,7 +1,7 @@
 using Godot;
 using System;
 [GlobalClass]
-public partial class PhysicsComp : BaseComp
+public partial class CharacterBodyPhysicsComp : BaseComp
 {
 	[Export] public CharacterBody2D PhysicsObject {get; private set;}
 	[Export] public float Gravity = 1;
@@ -15,7 +15,6 @@ public partial class PhysicsComp : BaseComp
 
 	public override void _Process(double delta)
 	{
-		
 	}
 
 	public bool IsLanded() {

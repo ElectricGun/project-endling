@@ -17,6 +17,7 @@ public static class DictionaryKeys {
         KeyNodePath = "nodePath",
         KeyNodeType = "nodeType",
         KeyIsSpawned = "isSpawned",
+        KeyPlayerAlreadySpawned = "pAlreadySpawned", 
 
         // leveldata
         KeyLevelObjects = "levelObjects",

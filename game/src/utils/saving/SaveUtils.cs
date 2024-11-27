@@ -41,7 +41,8 @@ public class SaveUtils {
 			{ KeyPositionY, 0 },
 			{ KeyVelocityX, 0 },
 			{ KeyVelocityY, 0 },
-			{ KeyCheckpoint, 0 }
+			{ KeyCheckpoint, 0 },
+			{ KeyPlayerAlreadySpawned, false}
 		};
 
 		return PlayerData;

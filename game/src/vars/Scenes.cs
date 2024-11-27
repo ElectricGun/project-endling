@@ -14,4 +14,8 @@ public static class Scenes {
 
     // transition
     public const string LINK_TO_TRANSITION_ELEMENT = "res://game/scenes/utils/graphics/transition_element.tscn";
+
+    // objects
+    public const string LINK_TO_JUMPING_LABEL = "res://game/scenes/entities/objects/jumping_label.tscn";
+    public const string LINK_TO_ANIMATED_TEXT = "res://game/scenes/entities/objects/animated_text.tscn";
 }

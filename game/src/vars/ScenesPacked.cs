@@ -17,4 +17,8 @@ public static class ScenesPacked {
 
     // transition
     public static readonly PackedScene TRANSITION_ELEMENT = GD.Load<PackedScene>(LINK_TO_TRANSITION_ELEMENT);
+
+    // objects
+    public static readonly PackedScene JUMPING_LABEL = GD.Load<PackedScene>(LINK_TO_JUMPING_LABEL);
+    public static readonly PackedScene ANIMATED_TEXT = GD.Load<PackedScene>(LINK_TO_ANIMATED_TEXT);
 }

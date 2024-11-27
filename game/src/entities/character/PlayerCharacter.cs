@@ -6,14 +6,14 @@ using static DictionaryKeys;
 [GlobalClass]
 public partial class PlayerCharacter : CharacterBody2D, Saveable
 {
-	[Export] public PhysicsComp PhysicsComp {get; private set;}
+	[Export] public CharacterBodyPhysicsComp PhysicsComp {get; private set;}
 	[Export] public UserControlComp UserControlComp {get; private set;}
 	[Export] public MovementComp MovementComp {get; private set;}
 	[Export] public FiniteStateMachine FiniteStateMachine {get; private set;}
 	[Export] public Sprite2D Sprite {get; private set;}
 
 	public Vector2 BaseSpriteScale {get; private set;}
-
+	public bool PlayerIsAlreadySpawned;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -43,6 +43,7 @@ public partial class PlayerCharacter : CharacterBody2D, Saveable
 		data[KeyPositionY] = GlobalPosition.Y;
 		data[KeyVelocityX] = Velocity.X;
 		data[KeyVelocityY] = Velocity.Y;
+		data[KeyPlayerAlreadySpawned] = PlayerIsAlreadySpawned;
 
 		return data;
 	}
@@ -50,6 +51,7 @@ public partial class PlayerCharacter : CharacterBody2D, Saveable
 	public void ImportData(Dictionary levelObjectData) {
 		GlobalPosition = new Vector2((float) levelObjectData[KeyPositionX], (float) levelObjectData[KeyPositionY]);
 		Velocity = new Vector2((float) levelObjectData[KeyVelocityX], (float) levelObjectData[KeyVelocityY]);
+		PlayerIsAlreadySpawned = (bool) levelObjectData[KeyPlayerAlreadySpawned];
 		GD.Print("[PlayerCharacter.ImportData] " + Name + " data imported!");
 	}
 

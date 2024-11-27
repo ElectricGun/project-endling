@@ -3,10 +3,7 @@ using Godot.Collections;
 public static class Vars {
     public static float TransitionSpeed = 3;
 
-    public static Array<string> Wordlist = new() {
-        //significant
-        "colour", 
-        
+    public static readonly Array<string> Wordlist = new() {
         //colours
         "red", "green", "blue", "yellow", "white", "purple", "pink",
 
@@ -15,5 +12,10 @@ public static class Vars {
 
         //adjectives
         "tall", "short", "big", "small"
+    };
+
+    public static readonly Array<string> SignificantWords = new() {
+        //significant
+        "colour" 
     };
 }

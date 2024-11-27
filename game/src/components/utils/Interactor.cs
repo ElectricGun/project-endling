@@ -47,7 +47,7 @@ public partial class Interactor : Node2D
             Interactable ClosestInteractable = null;
 
             foreach (Area2D Area in InteractionArea.GetOverlappingAreas()) {
-                if (Area is Interactable interactable) {
+                if (Area is Interactable interactable && interactable.GetInteractiveObject().IsActive()) {
                     float CurrentDistance = Area.GlobalPosition.DistanceTo(MousePosition);
 
                     if (CurrentDistance < SmallestDistance) {
@@ -63,6 +63,11 @@ public partial class Interactor : Node2D
             if (ClosestInteractable != null) {
                 if (DebugMode) DrawLine(MousePosition, ClosestInteractable.GetInteractiveObject().GlobalPosition, 20);
                 InteractionPopup.Visible = true;
+                InteractionPopup.GlobalPosition =  ((Node2D) ClosestInteractable).GlobalPosition;
+
+                // codeblock for interaction
+
+
             } else {
                 InteractionPopup.Visible = false;
             }

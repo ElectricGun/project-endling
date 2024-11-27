@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpmmj0vfma6yh"]
+
+[ext_resource type="Script" path="res://game/src/entities/objects/JumpingLabel.cs" id="1_851bu"]
+[ext_resource type="Script" path="res://game/src/components/physics/ObjectPhysicsComp.cs" id="1_n5f5t"]
+
+[node name="JumpingLabel" type="RichTextLabel" node_paths=PackedStringArray("_ObjectPhysicsComp")]
+z_index = 4096
+offset_right = 275.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "LOREM IPSUM"
+fit_content = true
+tab_size = 0
+script = ExtResource("1_851bu")
+_ObjectPhysicsComp = NodePath("ObjectPhysicsComp")
+
+[node name="ObjectPhysicsComp" type="Node2D" parent="."]
+script = ExtResource("1_n5f5t")
+Gravity = 100.0

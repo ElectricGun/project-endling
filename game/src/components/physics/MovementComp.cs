@@ -5,7 +5,7 @@ using System;
 public partial class MovementComp : BaseComp
 {
 	//[Export] public BaseAIComp BaseAIComp;
-	[Export] public PhysicsComp PhysicsComponent;
+	[Export] public CharacterBodyPhysicsComp PhysicsComponent;
 	[Export] public float HorizontalSpeed = 1;
 	[Export] public float HorizontalSprintSpeed = 1;
 
