@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using utils;
 
@@ -7,18 +8,18 @@ public partial class InteractiveObject : LevelObject
 	[Export] public string PopupName;
 	[Export] public string[] LearnedWords;
 	[Export] public float InteractionCooldownTime = 5f;
-	[Export] public float JumpingLabelGravity = 250f;
-	[Export] public float JumpingLabelDrag = 0.2f;
-	[Export] public Vector2 JumpingLabelVelocity = new Vector2(0, -100);
-	[Export] public float JumpingLabelLifetime = 10f;
+	[Export] public float JumpingLabelGravity = 0f;
+	[Export] public float JumpingLabelDrag = 0.1f;
+	[Export] public Vector2 JumpingLabelVelocity = new Vector2(0, -1000f);
+	[Export] public float JumpingLabelLifetime = 5f;
 
 	[Export] public bool Enabled = true;
 
-    [Signal] public delegate string WordLearnedEventHandler(string word);
+	[Signal] public delegate string WordLearnedEventHandler(string word);
 
 	protected Timer _Timer;
 
-	public bool IsActive() {
+	public virtual bool IsActive() {
 		return _Timer.IsStopped() && Enabled;
 	}
 
@@ -29,7 +30,7 @@ public partial class InteractiveObject : LevelObject
 		_Timer.OneShot = true;
 		AddChild(_Timer);
 	}
-	public void ObjectInteract()
+	public virtual void ObjectInteract()
 	{
 		if (_Timer.IsStopped()) {
 			_Timer.WaitTime = InteractionCooldownTime;
@@ -39,8 +40,12 @@ public partial class InteractiveObject : LevelObject
 
 			_JumpingLabel.GlobalPosition = new Vector2(GlobalPosition.X - _JumpingLabel.GetContentWidth() * 0.5f, GlobalPosition.Y);
 
-			foreach (string learnWord in LearnedWords) {
-				if(SessionData.LearnWord(learnWord)) EmitSignal(SignalName.WordLearned, learnWord);
+			try {
+				foreach (string learnWord in LearnedWords) {
+					if(SessionData.LearnWord(learnWord)) EmitSignal(SignalName.WordLearned, learnWord);
+				}
+			} catch (Exception e) {
+				GD.Print("[InteractiveObject.ObjectInteract]");
 			}
 		}
 	}

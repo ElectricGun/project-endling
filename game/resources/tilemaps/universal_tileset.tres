@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://dv58jfvjeifkv"]
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://dv58jfvjeifkv"]
 
 [ext_resource type="Texture2D" uid="uid://d0f3vkgg0oj31" path="res://icon.svg" id="1_1sx7i"]
 [ext_resource type="Texture2D" uid="uid://boch0skeb3s4l" path="res://game/assets/tilemaps/dirt_tileset_1.png" id="2_pxnqc"]
 [ext_resource type="Texture2D" uid="uid://cwhyxn2k7q61g" path="res://game/assets/tilemaps/sand_tileset_1.png" id="3_d05ql"]
 [ext_resource type="Texture2D" uid="uid://4rjx78y8qdqy" path="res://game/assets/tilemaps/sand-brick_tileset_1.png" id="4_0jnja"]
+[ext_resource type="Texture2D" uid="uid://d0q44sww5l4d0" path="res://game/assets/tilemaps/rusty_steelbeams_tileset_1.png" id="5_fqev4"]
 [ext_resource type="Texture2D" uid="uid://gjdx5g14d8rl" path="res://game/assets/tilemaps/darkness_tileset_1.png" id="5_vl7cg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x1ysg"]
@@ -1159,6 +1160,22 @@ texture_region_size = Vector2i(64, 64)
 2:6/0/terrain = 1
 2:6/0/terrains_peering_bit/top_side = 1
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ajxdm"]
+texture = ExtResource("5_fqev4")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+2:4/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7i8dk"]
 texture = ExtResource("5_vl7cg")
 texture_region_size = Vector2i(64, 64)
@@ -1510,3 +1527,4 @@ sources/2 = SubResource("TileSetAtlasSource_xml23")
 sources/1 = SubResource("TileSetAtlasSource_chhy5")
 sources/3 = SubResource("TileSetAtlasSource_raaek")
 sources/5 = SubResource("TileSetAtlasSource_7i8dk")
+sources/4 = SubResource("TileSetAtlasSource_ajxdm")

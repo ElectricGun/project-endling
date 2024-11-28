@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using utils;
 
 public partial class OptionsMenu : Menu
 {
@@ -55,15 +56,9 @@ public partial class OptionsMenu : Menu
 	
 	private void _on_full_screen_check_box_toggled(bool isToggled)
 	{
-		//fullscreen toggle
-		if (isToggled)
-		{
-			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
-		}
-		else
-		{
-			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
-		}
+		SessionData.IsFullscreen = isToggled;
+		
+		Functions.UpdateConfig();
 	}
 	
 	private void _on_volume_slider_value_changed(float value)

@@ -142,8 +142,14 @@ public partial class Level : Menu
 	}
 
 	protected void ImportData(Dictionary saveData) {
-		Dictionary LevelsDict = (Dictionary)saveData[KeySavedLevels];
 
+		// import non-level data
+		Dictionary LevelsDict = (Dictionary)saveData[KeySavedLevels];
+		SessionData.UnlockedWords = (Godot.Collections.Array) saveData[KeyUnlockedWords];
+
+		UpdateShaders();
+
+		// import level data
 		if (LevelsDict.ContainsKey((string) saveData[KeyCurrentLevel])) {
 
 			Dictionary LevelData = (Dictionary) LevelsDict[(string) saveData[KeyCurrentLevel]];

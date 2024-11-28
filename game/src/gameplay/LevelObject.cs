@@ -11,7 +11,7 @@ public partial class LevelObject : Node2D, Saveable
     [Export] public bool IsSaved {get; private set;} = true;
     public string PathToScene;
 
-    public Dictionary ExportData() {
+    public virtual Dictionary ExportData() {
         Dictionary data = SaveUtils.GenerateObjectDataTemplateDict();
 
         data[KeyIsSpawned] = IsSpawned;
@@ -23,7 +23,7 @@ public partial class LevelObject : Node2D, Saveable
         return data;
     }
     
-    public void ImportData(Dictionary levelObjectData) {
+    public virtual void ImportData(Dictionary levelObjectData) {
         GlobalPosition = new Vector2((float) levelObjectData[KeyPositionX], (float) levelObjectData[KeyPositionY]);
         IsSpawned = (bool) levelObjectData[KeyIsSpawned];
         GD.Print("[LevelObject.ImportData] " + Name + " data imported!");

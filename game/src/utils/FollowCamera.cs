@@ -18,34 +18,34 @@ public partial class FollowCamera : Camera2D, Saveable
 	}
 
 	public Dictionary ExportData() {
-        Dictionary data = SaveUtils.GenerateObjectDataTemplateDict();
+		Dictionary data = SaveUtils.GenerateObjectDataTemplateDict();
 
 
-        data[KeyNodePath]  = GetPath().ToString();
-        data[KeyNodeType]  = GetType().ToString();
-        data[KeyPositionX] = GlobalPosition.X;
-        data[KeyPositionY] = GlobalPosition.Y;
-        data[KeyCameraFollowObject] = FollowObject.GetPath();
-        data[KeyCameraLerpSpeed] = LerpSpeed;
+		data[KeyNodePath]  = GetPath().ToString();
+		data[KeyNodeType]  = GetType().ToString();
+		data[KeyPositionX] = GlobalPosition.X;
+		data[KeyPositionY] = GlobalPosition.Y;
+		data[KeyCameraFollowObject] = FollowObject.GetPath();
+		data[KeyCameraLerpSpeed] = LerpSpeed;
 
-        return data;
-    }
-    
-    public void ImportData(Dictionary levelObjectData) {
-        GlobalPosition = new Vector2((float) levelObjectData[KeyPositionX], (float) levelObjectData[KeyPositionY]);
-        FollowObject = (Node2D) GetNode((string) levelObjectData[KeyCameraFollowObject]);
-        LerpSpeed = (float) levelObjectData[KeyCameraLerpSpeed];
+		return data;
+	}
+	
+	public void ImportData(Dictionary levelObjectData) {
+		GlobalPosition = new Vector2((float) levelObjectData[KeyPositionX], (float) levelObjectData[KeyPositionY]);
+		FollowObject = (Node2D) GetNode((string) levelObjectData[KeyCameraFollowObject]);
+		LerpSpeed = (float) levelObjectData[KeyCameraLerpSpeed];
 
-        GD.Print("[FollowCamera.ImportData] " + Name + " data imported!");
-    }
+		GD.Print("[FollowCamera.ImportData] " + Name + " data imported!");
+	}
 
-    public bool GetIsSaved()
-    {
-        return true;
-    }
+	public bool GetIsSaved()
+	{
+		return true;
+	}
 
-    public void SetIsSaved(bool saved)
-    {
-        GD.Print("[FollowCamera.SetIsSaved] IsSaved is always true");
-    }
+	public void SetIsSaved(bool saved)
+	{
+		GD.Print("[FollowCamera.SetIsSaved] IsSaved is always true");
+	}
 }

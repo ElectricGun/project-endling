@@ -52,6 +52,6 @@ public partial class AnimatedText : RichTextLabel
 
 	internal void SetAnchor(LayoutPreset centerTop)
 	{
-		throw new NotImplementedException();
+		GD.Print("[AnimatedText.SetAnchor]" + centerTop);
 	}
 }

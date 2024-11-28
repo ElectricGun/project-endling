@@ -24,14 +24,16 @@ public static class DictionaryKeys {
         KeySaveName  = "saveName",
         KeyPlayerData = "playerData",
 
-
+        
         // camera data
         KeyCameraFollowObject = "cameraFollowObject",
         KeyCameraLerpSpeed = "cameraLerpSpeed",
 
         // state/statemachine
         KeyStateNodeName = "stateNodeName",
-        KeyStateFlags = "stateFlags"
+        KeyStateFlags = "stateFlags",
 
+        // settings session data
+        KeyIsFullscreen = "isFullscreen"
         ;
 }

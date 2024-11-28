@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3h5gtitfx6wo"]
+
+[ext_resource type="Script" path="res://game/src/utils/EngineLifecycleHandler.cs" id="1_m4tf5"]
+
+[node name="EngineLifecycleHandlers" type="Node"]
+script = ExtResource("1_m4tf5")

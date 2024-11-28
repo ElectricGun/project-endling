@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class MainMenu : Menu
 {	
@@ -24,6 +23,6 @@ public partial class MainMenu : Menu
 	}
 	
 	public void OnButtonQuitUp(){
-		GetTree().Quit(1);
+		GetTree().Root.PropagateNotification((int)NotificationWMCloseRequest);
 	}
 }

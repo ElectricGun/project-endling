@@ -4,8 +4,9 @@ namespace utils;
 
 public class SessionData {
     public static string LastLoadedSaveDirectory;
-    //public static string LastLoadedSaveName;
     public static Godot.Collections.Array UnlockedWords = new Godot.Collections.Array() {};
+
+    public static bool IsFullscreen = false;
 
     public static bool LearnWord (string word) {
         if (!UnlockedWords.Contains(word)) {

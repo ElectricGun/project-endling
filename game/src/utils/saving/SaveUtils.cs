@@ -67,35 +67,55 @@ public class SaveUtils {
 		};
 
 		// master data
-        Dictionary Data = new()
-        {
-            { KeyFormatRevision, SaveFileRevision },
-            { KeySaveName, saveName },
-            { KeyCurrentLevel, 0 },
-            { KeySavedLevels, Levels }
-        };
+		Dictionary Data = new()
+		{
+			{ KeyUnlockedWords, new Godot.Collections.Array()},
+			{ KeyFormatRevision, SaveFileRevision },
+			{ KeySaveName, saveName },
+			{ KeyCurrentLevel, 0 },
+			{ KeySavedLevels, Levels }
+		};
 		
 		return Data;
+	}
+
+	private static void CreateJSONSaveFile(string directory, string filename, Dictionary data) {
+
+
+		// generate json
+		string JSON = Json.Stringify(data, indent: "	");
+		
+		// initialise save file
+		Godot.FileAccess SaveFile = Godot.FileAccess.Open(directory.PathJoin(filename), Godot.FileAccess.ModeFlags.WriteRead);
+		SaveFile.StoreString(JSON);
+		SaveFile.Close();
+
+		GD.Print("[SaveUtils.NewSave] Save successfully created at : " + ProjectSettings.GlobalizePath(directory));
+	}
+
+
+	private static void OverwriteJson(string directory, string filename, Dictionary newData) {
+		string JSON = Json.Stringify(newData, indent: "	");
+
+		// initialise save file
+		Godot.FileAccess SaveFile = Godot.FileAccess.Open(directory.PathJoin(filename), Godot.FileAccess.ModeFlags.WriteRead);
+		SaveFile.StoreString(JSON);
+		SaveFile.Close();
+
+		GD.Print("[SaveUtils.OverwriteJson] saved to " + directory);	
 	}
 
 	public static void NewSave(string directory) {
 		NewSave("unnamed_game_save", directory);
 	}
+
 	public static void NewSave(string name, string directory) {
 
 		name = GetUniqueName(name, directory);
 		string NewDirectory = directory.PathJoin(name);
 		DirAccess.MakeDirRecursiveAbsolute(NewDirectory);     
 
-		// generate json
-        string JSON = Json.Stringify(GenerateSaveTemplateDict(name), indent: "	");
-        
-		// initialise save file
-		Godot.FileAccess SaveFile = Godot.FileAccess.Open(NewDirectory.PathJoin("save.json"), Godot.FileAccess.ModeFlags.WriteRead);
-		SaveFile.StoreString(JSON);
-		SaveFile.Close();
-
-		GD.Print("[SaveUtils.NewSave] Save successfully created at : " + ProjectSettings.GlobalizePath(NewDirectory));
+		CreateJSONSaveFile(NewDirectory, "save.json", GenerateSaveTemplateDict(name));
 	}
 
 	public static void OverwriteSave(string saveDirectory, Dictionary newSave) {
@@ -107,35 +127,49 @@ public class SaveUtils {
 		
 		newSave[KeyUnlockedWords] = SessionData.UnlockedWords;
 
-        string JSON = Json.Stringify(newSave, indent: "	");
+		string JSON = Json.Stringify(newSave, indent: "	");
 
 		// initialise save file
-		Godot.FileAccess SaveFile = Godot.FileAccess.Open(saveDirectory.PathJoin("save.json"), Godot.FileAccess.ModeFlags.WriteRead);
-		SaveFile.StoreString(JSON);
-		SaveFile.Close();
+		// Godot.FileAccess SaveFile = Godot.FileAccess.Open(saveDirectory.PathJoin("save.json"), Godot.FileAccess.ModeFlags.WriteRead);
+		// SaveFile.StoreString(JSON);
+		// SaveFile.Close();
+
+		OverwriteJson(saveDirectory, "save.json", newSave);
 
 		GD.Print("[SaveUtils.OverwriteSave] saved to " + saveDirectory);	
 	}
 
 	public static Dictionary LoadSave(string LinkToSaveDirectory) {
-	    if (!Directory.Exists(LinkToSaveDirectory)) {
-            throw new Exception ("[SaveUtils.LoadSave] Cannot load save at " + LinkToSaveDirectory + " Does not exist!");
-        }
+		if (!Directory.Exists(LinkToSaveDirectory)) {
+			throw new Exception ("[SaveUtils.LoadSave] Cannot load save at " + LinkToSaveDirectory + " Does not exist!");
+		}
 		Dictionary Out = (Dictionary) Json.ParseString(File.ReadAllText(LinkToSaveDirectory.PathJoin("save.json")));
 		SessionData.LastLoadedSaveDirectory = LinkToSaveDirectory;
 		if (!Out.ContainsKey(KeyUnlockedWords)) {
 			Out.Add(KeyUnlockedWords, new Godot.Collections.Array());
 		}
-		SessionData.UnlockedWords = (Godot.Collections.Array) Out[KeyUnlockedWords];
-
-        return Out;
+		//SessionData.UnlockedWords = (Godot.Collections.Array) Out[KeyUnlockedWords];
+		return Out;
 	}
 
+	public static Dictionary FetchSettings() {
 
-    public static Dictionary LoadSave(string name, string directory) {
-        string SavePath = directory.PathJoin(name);
+		Dictionary SettingsDict = new() {
+			{KeyIsFullscreen, SessionData.IsFullscreen}
+		};
+		return SettingsDict;
+	}
+	public static Dictionary LoadSave(string name, string directory) {
+		string SavePath = directory.PathJoin(name);
 		return LoadSave(SavePath);
-    }
+	}
 
+	public static void SaveSettingsFile(string directory) {
+		CreateJSONSaveFile(directory, "settings.json", FetchSettings());
+	}
 
+	public static Dictionary LoadSettings(string directory) {
+		return (Dictionary) Json.ParseString(File.ReadAllText(directory.PathJoin("settings.json")));
+
+	}
 }

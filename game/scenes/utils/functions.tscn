@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqk5rsp2t4251"]
+
+[ext_resource type="Script" path="res://game/src/utils/Functions.cs" id="1_co2pj"]
+
+[node name="Functions" type="Node"]
+script = ExtResource("1_co2pj")
