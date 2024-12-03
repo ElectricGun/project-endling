@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" path="res://game/src/ui/menus/OptionsMenu.cs" id="1_e0hbp"]
 
-[node name="OptionsMenu" type="Node2D" node_paths=PackedStringArray("BackButton", "CanvasLayer")]
+[node name="OptionsMenu" type="Node2D" node_paths=PackedStringArray("BackButton", "FullscreenCheckbox", "CanvasLayer")]
 script = ExtResource("1_e0hbp")
 BackButton = NodePath("CanvasLayer/BackButton")
+FullscreenCheckbox = NodePath("CanvasLayer/Control/FullScreenCheckBox")
 CanvasLayer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

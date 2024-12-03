@@ -14,6 +14,7 @@ public partial class SaveSelectionMenu : Menu
 	{
 		base._Ready();
 		BackButton.Connect(Button.SignalName.Pressed, Callable.From(GoBack));
+		Autoloads.GlobalSignals(this).SaveLoaded += OnSaveLoaded;
 		Reset();
 	}
 
@@ -31,7 +32,7 @@ public partial class SaveSelectionMenu : Menu
 		PathToSaveFolder = ProjectSettings.GlobalizePath(PathToSaveFolder);
 		LoadSaveButton LoadButton = (LoadSaveButton) ScenesPacked.LOAD_SAVE_BUTTON.Instantiate();
 		LoadButton.Text = PathToSaveFolder.GetFile();
-		LoadButton.SaveLoaded += OnSaveLoaded;
+		//LoadButton.SaveLoaded += OnSaveLoaded;
 		LoadButton.LinkToSaveDirectory = PathToSaveFolder;
 		GridContainer.AddChild(LoadButton);
 	}
@@ -48,12 +49,24 @@ public partial class SaveSelectionMenu : Menu
 		Reset();
 	}
 
+	public override void OnAnimationFinished(StringName animationFinished) {
+		if (DoTransition) 
+			GetTree().Root.AddChild(TransitionToScene.Instantiate());
+			
+		if (DoTransitionNode) {
+			QueueFree();
+			Autoloads.GlobalSignals(this).SaveLoaded -= OnSaveLoaded;
+			GetTree().Root.AddChild(TransitionToNode);
+		}
+	}
+
 	private void Reset() {
 
 		SavesDisplayed = 0;
 
 		foreach (Node Child in GridContainer.GetChildren()) {
 			Child.QueueFree();
+			
 		}	
 
 		foreach (string SaveFolder in DirAccess.GetDirectoriesAt(Directories.SaveDirGlobal)) {

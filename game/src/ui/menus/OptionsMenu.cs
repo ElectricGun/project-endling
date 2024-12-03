@@ -5,9 +5,12 @@ using utils;
 public partial class OptionsMenu : Menu
 {
 	[Export] public Button BackButton;
+	[Export] public CheckBox FullscreenCheckbox;
 	public override void _Ready()
 	{
 		base._Ready();
+
+		FullscreenCheckbox.ButtonPressed = SessionData.IsFullscreen;
 
 		BackButton.Connect(Button.SignalName.Pressed, Callable.From(BackToMainMenu));
 		

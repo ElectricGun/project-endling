@@ -4,10 +4,10 @@ public partial class Menu : Node2D
 {
 	[Export] public CanvasLayer CanvasLayer;
 	public TransitionElement TransitionElement;
-	private Node TransitionToNode = null;
-	private PackedScene TransitionToScene = ScenesPacked.MAIN_MENU;
-	private bool DoTransition = false;
-	private bool DoTransitionNode = false;
+	protected Node TransitionToNode = null;
+	protected PackedScene TransitionToScene = ScenesPacked.MAIN_MENU;
+	protected bool DoTransition = false;
+	protected bool DoTransitionNode = false;
 
 	public override void _Ready()
 	{
@@ -19,7 +19,7 @@ public partial class Menu : Node2D
 		GetTree().Paused = false;
 	}
 
-	public void OnAnimationFinished(StringName animationFinished) {
+	public virtual void OnAnimationFinished(StringName animationFinished) {
 		if (DoTransition) 
 			GetTree().Root.AddChild(TransitionToScene.Instantiate());
 		if (DoTransitionNode) {
@@ -40,6 +40,5 @@ public partial class Menu : Node2D
 		DoTransitionNode = true;
 		TransitionToNode = node;
 		TransitionElement.AnimPlayer.Play(TransitionElement.FADE_IN);
-
 	}
 }

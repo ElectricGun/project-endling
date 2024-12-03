@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 EngineLifecycleHandler="*res://game/scenes/utils/engine_lifecycle_handler.tscn"
 Functions="*res://game/scenes/utils/functions.tscn"
+GlobalSignals="*res://game/scenes/utils/global_signals.tscn"
 
 [display]
 

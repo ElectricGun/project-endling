@@ -13,7 +13,7 @@ public partial class LoadSaveButton : Button
 	public void OnButtonDown() {
 		GD.Print("[LoadSaveButton.OnButtonDown] attempting save load...");
 		try {
-			EmitSignal("SaveLoaded", SaveUtils.LoadSave(LinkToSaveDirectory));
+			Autoloads.GlobalSignals(this).EmitSignal(GlobalSignals.SignalName.SaveLoaded, SaveUtils.LoadSave(LinkToSaveDirectory));
 			GD.Print("[LoadSaveButton.OnButtonDown] save loaded");
 		} catch (Exception e) {
 			GD.Print("[LoadSaveButton.OnButtonDown] " + LinkToSaveDirectory );
