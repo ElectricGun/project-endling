@@ -15,6 +15,7 @@ public partial class InteractiveObject : LevelObject
 	[Export] public float JumpingLabelLifetime = 5f;
 	[Export] public bool Enabled = true;
 	[Export] public bool Interactable = true;
+	[Export] public bool AutoInteract = false;
 
 	public bool Activated {get; protected set;} = false;
 

@@ -34,7 +34,12 @@ public partial class SlidingDoor : InteractiveObject
 		}
 	}
 
-	public override void _Process(double delta)
+    public override void Toggle()
+    {
+        base.Toggle();
+		GD.Print("toggled");
+    }
+    public override void _Process(double delta)
 	{
 		if (_QueueOpen) {
 			OpenDoor(_QueueToggleTime);
@@ -42,7 +47,7 @@ public partial class SlidingDoor : InteractiveObject
 			CloseDoor(_QueueToggleTime);
 		}
 
-		GD.Print("" + Activated + AlreadyOpened + !DoorTimer.IsStopped());
+		//GD.Print("" + Activated + AlreadyOpened + !DoorTimer.IsStopped());
 
 		if (Activated) OpenDoor(OpeningTime);
 		else CloseDoor(ClosingTime);

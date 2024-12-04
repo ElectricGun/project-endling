@@ -232,7 +232,6 @@ InteractionArea = NodePath("Area2D")
 InteractionRadius = 128.0
 InteractionPopup = NodePath("../InteractionPopup")
 Enabled = true
-DebugMode = true
 
 [node name="Area2D" type="Area2D" parent="Interactor"]
 collision_layer = 0

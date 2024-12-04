@@ -9,6 +9,7 @@ public partial class Interactor : Node2D
 	[Export] public Area2D InteractionArea;
 	[Export] public float InteractionRadius;
 	[Export] public Node2D InteractionPopup;
+	[Export] public bool DoFollowMouse = false;
 	[Export] public bool Enabled;
 	[Export] public bool DebugMode;
 	protected Interactable _Interactable = null;
@@ -43,7 +44,8 @@ public partial class Interactor : Node2D
 		Vector2 MousePosition = GetGlobalMousePosition();
 
 		if (InteractionArea != null && Enabled) {
-			GlobalPosition = MousePosition;
+			if (DoFollowMouse)
+				GlobalPosition = MousePosition;
 			float SmallestDistance = float.MaxValue;
 			Interactable ClosestInteractable = null;
 			
