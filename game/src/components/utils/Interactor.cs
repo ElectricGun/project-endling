@@ -65,6 +65,11 @@ public partial class Interactor : Node2D
 						DrawLine(Start, End, 20);
 					}
 
+					if (interactable.GetInteractiveObject().AutoInteract) {
+						interactable.GetInteractiveObject().ObjectInteract();
+						continue;
+					}
+
 					if (DistanceToPlayer > InteractionRadius) continue;
 
 					if (CurrentDistance < SmallestDistance) {

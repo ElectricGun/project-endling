@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://dwb5ghhml2k8v"]
+[gd_scene load_steps=55 format=4 uid="uid://dwb5ghhml2k8v"]
 
 [ext_resource type="Script" path="res://game/src/gameplay/Level.cs" id="1_8wj17"]
 [ext_resource type="Material" uid="uid://djknm5oinaoal" path="res://game/resources/materials/screen_grayscale.tres" id="2_3wo41"]
@@ -24,6 +24,8 @@
 [ext_resource type="Shader" path="res://game/shaders/screenwide/screen_grayscale.gdshader" id="22_n05lv"]
 [ext_resource type="Script" path="res://game/src/gameplay/levelobjects/objectives/GreyPatch.cs" id="22_yvv2w"]
 [ext_resource type="Script" path="res://game/src/graphics/objects/WigglingPolygon2D.cs" id="23_3l5hd"]
+[ext_resource type="Shader" path="res://game/shaders/screenwide/colour_corrector.gdshader" id="25_xuo51"]
+[ext_resource type="Script" path="res://game/scenes/worlds/control_ui_level.gd" id="25_xvske"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m81go"]
 shader = ExtResource("7_nlyuk")
@@ -168,6 +170,10 @@ shader_parameter/alpha = 1.0
 shader_parameter/blur_strength = -0.008
 shader_parameter/samples = 4
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_42yc3"]
+radius = 17.0
+height = 586.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_njqs6"]
 shader = ExtResource("5_j2x1c")
 shader_parameter/blur_radius = Vector2(0.709, 1.152)
@@ -178,6 +184,14 @@ shader_parameter/samples = 4
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nfdr4"]
 shader = ExtResource("22_n05lv")
 shader_parameter/strength = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7m1l"]
+shader = ExtResource("25_xuo51")
+shader_parameter/blur_strength = 0.0
+shader_parameter/mix_col = Color(0.31847, 0.286126, 0.45125, 1)
+shader_parameter/mix_strength = 0.235
+shader_parameter/add_col = Color(0.0315629, 0.0150442, 0.18713, 1)
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [node name="Level1" type="Node2D" node_paths=PackedStringArray("RenderedTree", "WorldRenderer", "InitialSpawnPoint", "SavedObjectTree", "StaticObjectTree", "HiddenObjectTree", "PlayerCharacter", "CanvasLayer")]
 position = Vector2(0, 8)
@@ -535,7 +549,7 @@ tile_set = ExtResource("3_mhjwf")
 collision_enabled = false
 
 [node name="PlayerCharacter" parent="Rendered/SavedObjects" instance=ExtResource("2_blpnf")]
-position = Vector2(12975, -395)
+position = Vector2(10526, -24)
 
 [node name="Painting0" type="Node2D" parent="Rendered/SavedObjects"]
 position = Vector2(14985, 479)
@@ -965,6 +979,60 @@ tile_set = ExtResource("3_mhjwf")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rendered/SavedObjects/HiddenRoom_3/Area2D"]
 polygon = PackedVector2Array(-2030.7, -1378.93, -2038.7, -702.93, -618.7, -712.93, -664.7, -1450.93)
 
+[node name="grey???" type="Node2D" parent="Rendered/SavedObjects"]
+position = Vector2(11100, 99)
+script = ExtResource("8_6l1cu")
+PopupName = "grey????"
+LearnedWords = PackedStringArray("grey")
+InteractionCooldownTime = 1.0
+JumpingLabelVelocity = Vector2(0, -100)
+AutoInteract = true
+InteractOnce = true
+
+[node name="InteractableArea2D" type="Area2D" parent="Rendered/SavedObjects/grey???"]
+position = Vector2(-27, -39)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_tay8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rendered/SavedObjects/grey???/InteractableArea2D"]
+shape = SubResource("CapsuleShape2D_42yc3")
+
+[node name="much grey" type="Node2D" parent="Rendered/SavedObjects"]
+position = Vector2(11997, -78)
+script = ExtResource("8_6l1cu")
+PopupName = "much grey"
+LearnedWords = PackedStringArray("grey")
+JumpingLabelVelocity = Vector2(0, -100)
+AutoInteract = true
+InteractOnce = true
+
+[node name="InteractableArea2D" type="Area2D" parent="Rendered/SavedObjects/much grey"]
+position = Vector2(-27, -39)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_tay8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rendered/SavedObjects/much grey/InteractableArea2D"]
+shape = SubResource("CapsuleShape2D_42yc3")
+
+[node name="enter" type="Node2D" parent="Rendered/SavedObjects"]
+position = Vector2(13799, -235)
+script = ExtResource("8_6l1cu")
+PopupName = "enter"
+JumpingLabelVelocity = Vector2(0, -100)
+AutoInteract = true
+InteractOnce = true
+
+[node name="InteractableArea2D" type="Area2D" parent="Rendered/SavedObjects/enter"]
+position = Vector2(-27, -39)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_tay8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rendered/SavedObjects/enter/InteractableArea2D"]
+shape = SubResource("CapsuleShape2D_42yc3")
+
 [node name="DarknessLayer" type="CanvasGroup" parent="Rendered/SavedObjects"]
 material = SubResource("ShaderMaterial_njqs6")
 position = Vector2(14880, -288)
@@ -987,7 +1055,7 @@ script = ExtResource("22_yvv2w")
 material = SubResource("ShaderMaterial_nfdr4")
 position = Vector2(6, 3)
 offset = Vector2(-16656, 640)
-polygon = PackedVector2Array(14706.4, -1404.38, 14729, -1111.07, 14759.1, -1009.39, 14785.5, -921.144, 14860.9, -771.776, 14955.2, -629.999, 15131.2, -459.836, 15325.1, -406.21, 15537.7, -393.006, 15767.3, -432.782, 16008.6, -584.967, 16354.2, -573.486, 16439.2, -502.898, 16625.6, -376.677, 16809.4, -312.61, 16795.9, -269.797, 16773.3, -181.602, 16763.3, -65.2231, 16745.5, 17.4891, 16587.1, 163.725, 16717.4, 115.561, 16818.1, 2.46946, 16845.4, -92.6332, 16882.5, -258.088, 16893, -376.968, 16849.7, -461.559, 16816.5, -553.252, 16806, -690.327, 16749.5, -835.491, 16650.5, -947.813, 16536.2, -993.688, 16432.8, -1022.87, 16375.5, -1046.94, 16318.1, -1090.78, 16168.9, -1097.47, 16014.1, -1063.45, 15782.3, -993.164, 15542.2, -956.388, 15468.5, -1082.93, 15476.8, -1563.55, 15401.7, -1789.69, 15064.6, -1857.94, 14864.7, -1830.98)
+polygon = PackedVector2Array(14672.9, -1410.56, 14705.7, -1086.21, 14767.4, -976.355, 14817.8, -910.303, 14887.5, -793.1, 14951.7, -663.882, 15100.8, -475.127, 15295.8, -388.85, 15536.5, -358.956, 15795.3, -413.347, 16040.1, -598.015, 16360.2, -607.022, 16414.3, -526.087, 16592.6, -368.201, 16798.8, -280.261, 16817.3, -243.317, 16807.2, -185.336, 16778.4, -95.7389, 16728, -11.7517, 16553, 162.643, 16698.1, 143.633, 16831.3, 33.8858, 16878.9, -86.7561, 16905.6, -283.154, 16884.4, -409.931, 16817.3, -472.114, 16790.2, -531.694, 16809.9, -656.477, 16780.1, -820.47, 16679.7, -965.432, 16537.1, -1027.75, 16404.6, -1042.05, 16344.2, -1033.62, 16312.4, -1057.19, 16194.1, -1074.5, 16047, -1072.22, 15792.7, -1025.61, 15520.6, -982.678, 15434.7, -1078.9, 15462, -1532.9, 15419.5, -1760.6, 15098.7, -1857.16, 14883.8, -1859.22)
 script = ExtResource("23_3l5hd")
 Interval = 10
 WiggleAmount = 18.865
@@ -997,7 +1065,7 @@ WiggleSpeed = 0.475
 material = ExtResource("2_3wo41")
 position = Vector2(796, -79)
 offset = Vector2(-16656, 640)
-polygon = PackedVector2Array(17900.6, -1932.32, 17051.2, -1973.76, 16355.4, -2038.8, 16166.4, -1977.48, 16058.7, -1769.53, 16117, -1621.44, 16222, -1512.41, 16321.2, -1398.95, 16408.6, -1299.94, 16490.9, -1186.43, 16676.3, -1003.65, 16753.6, -849.969, 16805.9, -783.929, 16789.4, -704.099, 16671.4, -608.653, 16547.4, -516.221, 16338.4, -372.956, 16195.5, -303.973, 16123, -249.887, 16064.9, -177.453, 16048.2, -21.6468, 15959, 85.9316, 15900.3, 177.704, 15872.6, 288.216, 15713.1, 368.707, 15593.6, 377.415, 15467.9, 362.757, 15583.9, 396.42, 15724.9, 397.543, 15857.6, 366.842, 15977.5, 341.066, 16073.8, 233.017, 16115, 126.853, 16116.1, -28.8191, 16131.9, -167.896, 16225.2, -251.14, 16422.7, -275.255, 16577.7, -379.846, 16793.4, -469.4, 16903.8, -544.698, 17144.8, -654.068, 17407.3, -708.026, 17617.5, -688.604, 17768.4, -690.144, 17976.3, -701.778, 18147.1, -728.165, 18282.6, -790.561, 18384.4, -839.053, 18440.9, -909.108, 18511.6, -966.144, 18576.6, -1069.51, 18662.7, -1231.64, 18736.9, -1454.78, 18686.9, -1795.72, 18608, -2359.43, 18115.8, -2058.64)
+polygon = PackedVector2Array(17898.4, -1929.93, 17052.1, -1970.68, 16358.5, -2037.86, 16168.9, -1979.54, 16058.3, -1772.7, 16114.1, -1622.8, 16219.3, -1510.71, 16321.1, -1395.76, 16411.3, -1298.19, 16493.8, -1187.72, 16676.7, -1006.81, 16751.2, -852.083, 16802.9, -783.056, 16788.5, -701.041, 16673.4, -606.221, 16550.5, -516.652, 16339.8, -375.853, 16193.8, -306.672, 16119.8, -249.908, 16063.1, -174.776, 16049.5, -18.7331, 15962.2, 86.4024, 15902.4, 175.299, 15871.7, 285.146, 15710, 367.795, 15591.2, 379.499, 15468.4, 365.921, 15586.8, 397.755, 15727.6, 395.822, 15857.6, 363.647, 15974.8, 339.335, 16070.9, 234.341, 16114.6, 130.016, 16118.6, -26.726, 16135, -168.797, 16226.1, -254.206, 16420.6, -277.668, 16574.5, -379.387, 16792, -466.491, 16905.5, -542.014, 17148, -654.076, 17409.1, -710.719, 17616.2, -691.506, 17765.3, -690.586, 17974.2, -699.355, 18148, -725.104, 18285.7, -789.676, 18386.8, -841.158, 18440.4, -912.268, 18508.7, -967.454, 18573.9, -1067.76, 18662.7, -1228.45, 18739.6, -1453.08, 18689.8, -1797.07, 18608.4, -2362.59, 18113.4, -2060.71)
 script = ExtResource("23_3l5hd")
 Interval = 10
 WiggleAmount = 2.253
@@ -1005,7 +1073,7 @@ WiggleSpeed = 4.81
 
 [node name="Polygon2D3" type="Polygon2D" parent="Rendered/ObjectiveLayer/GreyPatches"]
 material = ExtResource("2_3wo41")
-polygon = PackedVector2Array(170.9, 896.357, 67.1693, 1013.13, -19.5561, 1106.71, -443.688, 1190.39, -558.269, 1172.54, -787.763, 1111.22, -533.555, 1237.85, -389.676, 1268.78, -244.933, 1258.92, -76.1718, 1208.99, 55.6668, 1183.89, 217.65, 1028.9, 330.876, 768.165, 296.296, 510.435, 222.604, 370.303, 214.438, 524.733)
+polygon = PackedVector2Array(168.922, 892.766, 63.0786, 1012.85, -21.9979, 1110.01, -442.236, 1194.23, -554.258, 1173.39, -784.881, 1108.3, -534.452, 1233.85, -393.527, 1267.37, -248.197, 1261.4, -75.8488, 1213.08, 59.2806, 1185.83, 221.232, 1026.9, 331.133, 764.073, 292.992, 508.008, 218.776, 371.772, 213.606, 528.748)
 script = ExtResource("23_3l5hd")
 Interval = 5
 WiggleAmount = 1.935
@@ -1013,8 +1081,9 @@ WiggleSpeed = 7.77
 
 [node name="Polygon2D4" type="Polygon2D" parent="Rendered/ObjectiveLayer/GreyPatches"]
 material = SubResource("ShaderMaterial_nfdr4")
-position = Vector2(6, 3)
-polygon = PackedVector2Array(-5541.19, 1187.59, -5492.68, 961.022, -5454.63, 785.822, -5469.99, 448.497, -5506.15, 198.554, -5496.62, -119.028, -5453.58, -425.817, -5409.68, -151.655, -5377.3, 43.9716, -5328.16, 224.752, -5236.67, 440.003, -5174.47, 668.86, -5120.91, 891.242, -4992.99, 999.417, -4941.57, 1178.05)
+position = Vector2(5072, -59)
+scale = Vector2(1.67322, 1)
+polygon = PackedVector2Array(-5533.72, 1164.75, -5507.86, 942.393, -5478.51, 788.53, -5480.61, 470.052, -5493.75, 219.138, -5472.6, -118.339, -5440.02, -445.656, -5419.05, -173.783, -5400.98, 39.9, -5344.38, 242.48, -5230.51, 463.232, -5151.6, 676.233, -5102.35, 875.981, -4995.8, 975.553, -4963.17, 1167.53)
 script = ExtResource("23_3l5hd")
 Interval = 10
 WiggleAmount = 19.15
@@ -1022,8 +1091,8 @@ WiggleSpeed = 2.08
 
 [node name="Polygon2D5" type="Polygon2D" parent="Rendered/ObjectiveLayer/GreyPatches"]
 material = SubResource("ShaderMaterial_nfdr4")
-position = Vector2(-15802, 628)
-polygon = PackedVector2Array(9603.02, 803.575, 9329.65, 487.919, 9215.73, 212.612, 9214.51, -2.36634, 9259.91, -111.1, 9341.79, -230.566, 9454.82, -361.932, 9437.68, -236.796, 9361.77, -80.7828, 9353.03, 100.822, 9439.82, 275.651, 9601.49, 488.043, 9761.14, 614.604)
+position = Vector2(-13953, 381)
+polygon = PackedVector2Array(9609.33, 815.701, 9343.26, 489.162, 9224.13, 201.83, 9209.98, -15.2615, 9246.61, -114.252, 9331.95, -221.077, 9457.49, -348.526, 9450.41, -231.798, 9372.85, -88.7883, 9352.28, 87.1737, 9427.93, 268.908, 9589.39, 494.405, 9759.96, 628.222)
 script = ExtResource("23_3l5hd")
 Interval = 10
 WiggleAmount = 20.53
@@ -1032,7 +1101,7 @@ WiggleSpeed = 1.045
 [node name="Polygon2D6" type="Polygon2D" parent="Rendered/ObjectiveLayer/GreyPatches"]
 material = SubResource("ShaderMaterial_nfdr4")
 position = Vector2(-15802, 628)
-polygon = PackedVector2Array(13496.5, 653.288, 12738.7, 657.701, 12404.3, 449.792, 12200.4, -51.6906, 12187.8, -776.418, 12185.2, -1389.59, 12140.7, -1709.92, 12838.1, -2184.34, 12716.2, -1238.04, 13104.9, -524.698, 13615.6, -180.065, 14259.1, 24.6405, 14442.3, 87.6811)
+polygon = PackedVector2Array(13439, 752.775, 12791.3, 759.815, 12518.7, 460.65, 12271.3, -142.071, 12150.1, -884.942, 12073.5, -1416.48, 12057.7, -1630.46, 12860.1, -2071.57, 12823, -1195.65, 13198.3, -591.658, 13609.7, -294.807, 14159.4, -32.3909, 14340.4, 140.796)
 script = ExtResource("23_3l5hd")
 Interval = 10
 WiggleAmount = 79.135
@@ -1163,4 +1232,27 @@ position = Vector2(7617, 9)
 scale = Vector2(0.375, 0.375)
 texture = ExtResource("3_w6yah")
 
+[node name="ColourCorrector" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="ColourCorrector"]
+material = SubResource("ShaderMaterial_b7m1l")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ControlUILevel" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("25_xvske")
+
+[node name="FPS" type="Label" parent="UI/ControlUILevel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

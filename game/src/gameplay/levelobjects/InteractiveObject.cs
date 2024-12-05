@@ -16,7 +16,8 @@ public partial class InteractiveObject : LevelObject
 	[Export] public bool Enabled = true;
 	[Export] public bool Interactable = true;
 	[Export] public bool AutoInteract = false;
-
+	[Export] public bool InteractOnce = false;
+	public bool Interacted {get; protected set;} = false;
 	public bool Activated {get; protected set;} = false;
 
 	[Signal] public delegate string WordLearnedEventHandler(string word);
@@ -28,7 +29,7 @@ public partial class InteractiveObject : LevelObject
 	}
 
 	public virtual bool IsInteractable() {
-		return IsActive() && Interactable;
+		return IsActive() && Interactable && (!InteractOnce || InteractOnce && !Interacted);
 	}
 
     public virtual void Activate()
@@ -75,18 +76,22 @@ public partial class InteractiveObject : LevelObject
 
 			WordPopup();
 		}
+		Interacted = true;
+		
 	}
 
     public override void ImportData(Dictionary levelObjectData)
     {
         base.ImportData(levelObjectData);
 		Activated = (bool) levelObjectData["activated"];
+		Interacted = (bool) levelObjectData["interact"];
     }
 
     public override Dictionary ExportData()
     {
         Dictionary Out = base.ExportData();
 		Out["activated"] = Activated;
+		Out["interacted"] = Interacted;
 		return Out; 
     }
 }

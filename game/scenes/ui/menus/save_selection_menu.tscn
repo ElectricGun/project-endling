@@ -1,24 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkp228wbwebb3"]
+[gd_scene load_steps=5 format=3 uid="uid://bkp228wbwebb3"]
 
 [ext_resource type="Script" path="res://game/src/ui/menus/SaveSelectionMenu.cs" id="1_wkgy8"]
+[ext_resource type="Script" path="res://game/scenes/ui/menus/control_save_menu.gd" id="2_3tkur"]
+[ext_resource type="Shader" path="res://game/shaders/objects/gradient.gdshader" id="3_r5u5b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xtkht"]
+shader = ExtResource("3_r5u5b")
+shader_parameter/first_color = Color(0.286059, 0.21146, 0.44032, 1)
+shader_parameter/second_color = Color(0.584346, 0.917607, 0.990101, 1)
+shader_parameter/mix_amount = 1.06
+shader_parameter/x_amount = 0.535
+shader_parameter/y_amount = 0.205
+shader_parameter/position = 0.131
+shader_parameter/stepIntensify = 19
 
 [node name="SaveSelectionMenu" type="Node2D" node_paths=PackedStringArray("BackButton", "GridContainer", "CanvasLayer")]
 script = ExtResource("1_wkgy8")
 BackButton = NodePath("CanvasLayer/BackButton")
-GridContainer = NodePath("CanvasLayer/Control/VBoxContainer")
+GridContainer = NodePath("CanvasLayer/ControlSaveMenu/VBoxContainer")
 CanvasLayer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_xtkht")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+[node name="ControlSaveMenu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_3tkur")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlSaveMenu"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -28,6 +49,11 @@ offset_top = -20.0
 offset_right = 145.0
 offset_bottom = 20.0
 grow_vertical = 2
+
+[node name="FPS" type="Label" parent="CanvasLayer/ControlSaveMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="BackButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 4

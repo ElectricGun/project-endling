@@ -24,7 +24,7 @@ GlobalSignals="*res://game/scenes/utils/global_signals.tscn"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="ignore"
 
 [dotnet]
 
