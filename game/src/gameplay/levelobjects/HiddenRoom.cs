@@ -1,12 +1,19 @@
 using System;
+using System.Linq;
 using Godot;
+using Godot.Collections;
 
 [GlobalClass]
 public partial class HiddenRoom : LevelObject 
 {
     public Area2D Area {get; private set;}
+    [Export] public bool ModulateChildren = true;
     [Export] public Node2D[] HiddenObjects;
-    [Export] public float revealingSpeed = 0.1f;
+    [Export] public float RevealingSpeed = 0.1f;
+    [Export] public float AlphaTo = 0;
+    [Export] public bool PermanentReveal = false;
+    public bool AlreadyRevealed {get; private set;} = false;
+    protected float setTransparencyValue = 1;
 
     public override void _Ready()
     {
@@ -19,21 +26,58 @@ public partial class HiddenRoom : LevelObject
         }
     }
 
+    protected void MakeTransparent(Array<Node> objects) {
+        foreach (Node _object in objects) {
+            if (_object is ShaderTransparentable shaderTransparentable)
+                shaderTransparentable.SetAlpha(setTransparencyValue);
+            else if (_object is Node2D node2d)
+                node2d.Modulate = new Color(node2d.Modulate.R, node2d.Modulate.G, node2d.Modulate.B, setTransparencyValue);
+        }
+    }
+
     public override void _Process(double delta)
     {
         base._Process(delta);
         float ModulateTarget = 1;
-        foreach (Node2D node2D in Area.GetOverlappingBodies()) {
-            if (node2D is PlayerCharacter playerCharacter) {
-                ModulateTarget = 0;
-                break;
+
+        if (!PermanentReveal) {
+            AlreadyRevealed = false;
+        }
+        
+        if (AlreadyRevealed) {
+            ModulateTarget = AlphaTo;
+        } else {
+            foreach (Node2D node2D in Area.GetOverlappingBodies()) {
+                if (node2D is PlayerCharacter playerCharacter) {
+                    ModulateTarget = AlphaTo;
+                    AlreadyRevealed = true;
+                    break;
+                }
             }
         }
-        Modulate = new Color(Modulate.R, Modulate.G, Modulate.B, (float)Mathf.Lerp(Modulate.A, ModulateTarget, revealingSpeed));
+        setTransparencyValue = (float)Mathf.Lerp(setTransparencyValue, ModulateTarget, RevealingSpeed * delta);
         if (HiddenObjects!= null) {
-            foreach (Node2D node2d in HiddenObjects) {
-                node2d.Modulate = Modulate;
-            }
+            MakeTransparent(new Array<Node>(HiddenObjects));
         }
+
+        if (ModulateChildren) {
+            MakeTransparent(GetChildren());
+        }
+    }
+
+    public override void ImportData(Dictionary levelObjectData)
+    {
+        base.ImportData(levelObjectData);
+        setTransparencyValue = (float) levelObjectData["setTransparencyValue"];
+        AlreadyRevealed = (bool) levelObjectData["alreadyRevealed"];
+    }
+
+    public override Dictionary ExportData()
+    {
+        Dictionary Base = base.ExportData();
+        Base["setTransparencyValue"] = setTransparencyValue;
+        Base["alreadyRevealed"] = AlreadyRevealed;
+        return Base;
+
     }
 }

@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://djknm5oinaoal"]
 
-[ext_resource type="Shader" path="res://game/shaders/screenwide/screen_blur.gdshader" id="1_b68od"]
+[ext_resource type="Shader" path="res://game/shaders/screenwide/screen_grayscale.gdshader" id="1_5sqq0"]
 
 [resource]
-shader = ExtResource("1_b68od")
-shader_parameter/blur_strength = 0.0
+shader = ExtResource("1_5sqq0")
+shader_parameter/strength = 1.0

@@ -17,7 +17,7 @@ public partial class Level : Menu
 	[Export] public Node HiddenObjectTree;
 	[Export] public PlayerCharacter PlayerCharacter;
 
-	[Export] public ColorRect ScreenGrayscaleRect;
+	//[Export] public ColorRect ScreenGrayscaleRect;
 	[Export] public ColorRect ScreenBlurRect;
 
 	public PauseMenu PauseMenu;
@@ -97,19 +97,19 @@ public partial class Level : Menu
 
 	public void UpdateShaders(double delta) {
 		// set grayscale based on "colour" word unlock
-		if (ScreenGrayscaleRect.Material is ShaderMaterial shaderMaterial) {
-			float GrayscaleFactor = (float)shaderMaterial.GetShaderParameter("strength");
-			float LerpSpeed = .1f * (float)delta;
-			shaderMaterial.SetShaderParameter("strength", SessionData.UnlockedWords.Contains("colour") ? Mathf.Lerp(GrayscaleFactor, 0, LerpSpeed) : Mathf.Lerp(GrayscaleFactor, 1, LerpSpeed));
-		}
+		//if (ScreenGrayscaleRect.Material is ShaderMaterial shaderMaterial) {
+			//float GrayscaleFactor = (float)shaderMaterial.GetShaderParameter("strength");
+			//float LerpSpeed = .1f * (float)delta;
+			//shaderMaterial.SetShaderParameter("strength", SessionData.UnlockedWords.Contains("colour") ? Mathf.Lerp(GrayscaleFactor, 0, LerpSpeed) : Mathf.Lerp(GrayscaleFactor, 1, LerpSpeed));
+		//}
 	}
 
 
 	public void UpdateShaders() {
 		// set grayscale based on "colour" word unlock
-		if (ScreenGrayscaleRect.Material is ShaderMaterial shaderMaterial) {
-			shaderMaterial.SetShaderParameter("strength", SessionData.UnlockedWords.Contains("colour") ? 0 : 1);
-		}
+		//if (ScreenGrayscaleRect.Material is ShaderMaterial shaderMaterial) {
+			//shaderMaterial.SetShaderParameter("strength", SessionData.UnlockedWords.Contains("colour") ? 0 : .5);
+		//}
 	}
 
 	protected void Save() {

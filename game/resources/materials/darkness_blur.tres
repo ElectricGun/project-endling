@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dk7uvnvit8vw5"]
+
+[ext_resource type="Shader" path="res://game/shaders/objects/tilemap_blur.gdshader" id="1_s4hhy"]
+
+[resource]
+shader = ExtResource("1_s4hhy")
+shader_parameter/blur_radius = Vector2(1.309, 1.692)
+shader_parameter/alpha = 1.0
+shader_parameter/blur_strength = -0.008
+shader_parameter/samples = 4

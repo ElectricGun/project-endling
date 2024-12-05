@@ -3,6 +3,7 @@ shader_type canvas_item;
 //uniform vec4 mix_colour : source_color;
 //uniform float colour_mix_strength;
 uniform vec2 blur_radius = vec2(1.0, 1.0);
+uniform float alpha = 1;
 uniform float blur_strength = 0.1;
 uniform int samples;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
@@ -32,5 +33,6 @@ void fragment() {
     // Mix the blurred color with the darkened background
 	//COLOR = vec4(1.0, 1.0, 1.0, blurred_colour.r);
 	COLOR = blurred_colour;
+	COLOR = vec4(COLOR.rgb, alpha * COLOR.a);
 	//COLOR *= blurred_colour;
 }
