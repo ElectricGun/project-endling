@@ -81,7 +81,7 @@ public partial class Level : Menu
 			AnimText.RemoveFadeOutDelay(UpTime + FadeInOutTime, FadeInOutTime);
 			AnimText.Text = "[center]" + word.Capitalize() + "[/center]";
 			AnimText.SetAnchor(Control.LayoutPreset.CenterTop);
-			AnimText.PushFontSize(121);
+			//AnimText.PushFontSize(121);
 			GD.Print("[Level.NewWordLearned] Significant word " + word);
 		} else {
 			GD.Print("[Level.NewWordLearned] " + word);

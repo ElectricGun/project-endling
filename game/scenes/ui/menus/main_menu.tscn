@@ -22,9 +22,9 @@ default_font_size = 0
 [node name="MainMenu" type="Node2D" node_paths=PackedStringArray("StartButton", "SettingsButton", "QuitButton", "CanvasLayer")]
 process_mode = 3
 script = ExtResource("1_a281r")
-StartButton = NodePath("CanvasLayer/ControlMainMenu/VBoxContainer/StartButton")
-SettingsButton = NodePath("CanvasLayer/ControlMainMenu/VBoxContainer/OptionsButton")
-QuitButton = NodePath("CanvasLayer/ControlMainMenu/VBoxContainer/QuitButton")
+StartButton = NodePath("CanvasLayer/ControlMainMenu/Control2/VBoxContainer/StartButton")
+SettingsButton = NodePath("CanvasLayer/ControlMainMenu/Control2/VBoxContainer/OptionsButton")
+QuitButton = NodePath("CanvasLayer/ControlMainMenu/Control2/VBoxContainer/QuitButton")
 CanvasLayer = NodePath("CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -47,7 +47,6 @@ scale = Vector2(0.606944, 0.606944)
 visible = false
 modulate = Color(0.6138, 0.4257, 0.99, 1)
 texture_repeat = 3
-scale = Vector2(1, 1)
 texture = ExtResource("4_3136w")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ControlMainMenu"]
@@ -59,38 +58,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Project-endling-logo" type="Sprite2D" parent="CanvasLayer/ControlMainMenu"]
-position = Vector2(408.173, 136.535)
-scale = Vector2(0.41012, 0.41012)
-texture = ExtResource("2_twq1t")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlMainMenu"]
+[node name="Control2" type="Control" parent="CanvasLayer/ControlMainMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 206.0
-offset_top = 20.0
-offset_right = 484.0
-offset_bottom = 252.0
+offset_left = -139.0
+offset_right = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlMainMenu/Control2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = -20.0
+offset_right = 139.0
+offset_bottom = 212.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="StartButton" type="Button" parent="CanvasLayer/ControlMainMenu/VBoxContainer"]
+[node name="StartButton" type="Button" parent="CanvasLayer/ControlMainMenu/Control2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme = SubResource("Theme_rf31r")
 text = "Start"
 
-[node name="OptionsButton" type="Button" parent="CanvasLayer/ControlMainMenu/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="CanvasLayer/ControlMainMenu/Control2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "Option"
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/ControlMainMenu/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="CanvasLayer/ControlMainMenu/Control2/VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "Quit"
@@ -99,3 +105,22 @@ text = "Quit"
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Control" type="Control" parent="CanvasLayer/ControlMainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Project-endling-logo" type="Sprite2D" parent="CanvasLayer/ControlMainMenu/Control"]
+position = Vector2(0, -166)
+scale = Vector2(0.41012, 0.41012)
+texture = ExtResource("2_twq1t")

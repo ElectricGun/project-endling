@@ -7,6 +7,11 @@
 z_index = 4096
 offset_right = 275.0
 offset_bottom = 40.0
+theme_override_font_sizes/bold_italics_font_size = 0
+theme_override_font_sizes/italics_font_size = 0
+theme_override_font_sizes/mono_font_size = 0
+theme_override_font_sizes/normal_font_size = 0
+theme_override_font_sizes/bold_font_size = 0
 bbcode_enabled = true
 text = "LOREM IPSUM"
 fit_content = true

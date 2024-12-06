@@ -8,6 +8,7 @@ public partial class InteractiveObject : LevelObject
 {   
 	[Export] public string PopupName;
 	[Export] public string[] LearnedWords;
+	[Export] public float PopupScale = 1;
 	[Export] public float InteractionCooldownTime = 5f;
 	[Export] public float JumpingLabelGravity = 0f;
 	[Export] public float JumpingLabelDrag = 0.1f;
@@ -57,8 +58,8 @@ public partial class InteractiveObject : LevelObject
 
 	public virtual void WordPopup() {
 		JumpingLabel _JumpingLabel = JumpingLabel.Spawn(this, JumpingLabelVelocity.X, JumpingLabelVelocity.Y, JumpingLabelLifetime, JumpingLabelGravity, JumpingLabelDrag, PopupName);
-
 		_JumpingLabel.GlobalPosition = new Vector2(GlobalPosition.X - _JumpingLabel.GetContentWidth() * 0.5f, GlobalPosition.Y);
+		_JumpingLabel.Scale *= PopupScale;
 
 		try {
 			foreach (string learnWord in LearnedWords) {
@@ -84,7 +85,7 @@ public partial class InteractiveObject : LevelObject
     {
         base.ImportData(levelObjectData);
 		Activated = (bool) levelObjectData["activated"];
-		Interacted = (bool) levelObjectData["interact"];
+		Interacted = (bool) levelObjectData["interacted"];
     }
 
     public override Dictionary ExportData()

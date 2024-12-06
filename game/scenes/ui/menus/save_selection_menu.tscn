@@ -7,11 +7,11 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xtkht"]
 shader = ExtResource("3_r5u5b")
 shader_parameter/first_color = Color(0.286059, 0.21146, 0.44032, 1)
-shader_parameter/second_color = Color(0.584346, 0.917607, 0.990101, 1)
-shader_parameter/mix_amount = 1.06
-shader_parameter/x_amount = 0.535
-shader_parameter/y_amount = 0.205
-shader_parameter/position = 0.131
+shader_parameter/second_color = Color(0.589723, 0.500341, 0.802847, 1)
+shader_parameter/mix_amount = 1.135
+shader_parameter/x_amount = 1.15
+shader_parameter/y_amount = -0.275
+shader_parameter/position = 0.338
 shader_parameter/stepIntensify = 19
 
 [node name="SaveSelectionMenu" type="Node2D" node_paths=PackedStringArray("BackButton", "GridContainer", "CanvasLayer")]

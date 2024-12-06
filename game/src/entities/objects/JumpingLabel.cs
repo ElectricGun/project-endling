@@ -39,6 +39,7 @@ public partial class JumpingLabel : RichTextLabel
 		_JumpingLabel._ObjectPhysicsComp.DragFactor = drag;
 		_JumpingLabel._ObjectPhysicsComp.Gravity = gravity;
 		_JumpingLabel._ObjectPhysicsComp.Velocity = new Vector2(vX, vY);
+		GD.Print(_JumpingLabel.GetThemeDefaultFontSize());
 		_JumpingLabel.Init();
 
 		return _JumpingLabel;
