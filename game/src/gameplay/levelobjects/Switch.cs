@@ -29,12 +29,13 @@ public partial class Switch : InteractiveObject {
 	{
 		base.ObjectInteract();
 		Activated = !Activated;
-		UpdateSprite(Activated);
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+
+		UpdateSprite(Activated);
 
 		if (Activatables != null) {
 		  foreach (InteractiveObject Activatable in Activatables) {

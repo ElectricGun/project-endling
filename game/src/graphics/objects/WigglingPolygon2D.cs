@@ -7,6 +7,7 @@ public partial class WigglingPolygon2D : Polygon2D
 {
     [Export] public bool Regenerate = true;
     [Export] public bool Enabled = true;
+    [Export] public bool Preview = false;
     [Export] public int Subdivisions = 0;
     [Export] public float Wavelength = 1;
     [Export] public bool PreviewSubdivisions = false;
@@ -30,7 +31,7 @@ public partial class WigglingPolygon2D : Polygon2D
 
 	public override void _Process(double delta)
 	{
-        if (Enabled) {
+        if (Enabled && (!Engine.IsEditorHint() || Preview)) {
             ticker ++;
             if (ticker % Interval == 0) {
                 time += (float)(delta * WiggleSpeed) * Interval;
