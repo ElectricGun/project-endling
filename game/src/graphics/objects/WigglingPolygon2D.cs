@@ -59,7 +59,7 @@ public partial class WigglingPolygon2D : Polygon2D
 
         Vector2[] smoothedPolygon;
         
-        if (Subdivisions > 0 && PreviewSubdivisions) {
+        if (Subdivisions > 0 && (PreviewSubdivisions || !Engine.IsEditorHint())) {
             smoothedPolygon = (Vector2[])wiggledPolygon.Clone();
 
             for (int h = 0; h < Subdivisions; h++) {

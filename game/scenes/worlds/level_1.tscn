@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://dwb5ghhml2k8v"]
+[gd_scene load_steps=67 format=4 uid="uid://dwb5ghhml2k8v"]
 
 [ext_resource type="Script" path="res://game/src/gameplay/Level.cs" id="1_8wj17"]
 [ext_resource type="Material" uid="uid://djknm5oinaoal" path="res://game/resources/materials/screen_grayscale.tres" id="2_3wo41"]
@@ -19,8 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://38eh13llm0gg" path="res://game/assets/sprites/scenery/tree_dead_1.png" id="10_0sakp"]
 [ext_resource type="Texture2D" uid="uid://c6erj8dqopeyv" path="res://game/assets/sprites/scenery/cactus_1.png" id="12_rd4u1"]
 [ext_resource type="Script" path="res://game/src/gameplay/levelobjects/SlidingDoor.cs" id="16_kcqov"]
+[ext_resource type="Texture2D" uid="uid://b8rmbl7vyqv2s" path="res://game/assets/sprites/scenery/colours.png" id="16_lwrl4"]
 [ext_resource type="Texture2D" uid="uid://fuoeiem81quf" path="res://game/assets/sprites/painting_damaged_1.png" id="16_q1v62"]
 [ext_resource type="Script" path="res://game/src/gameplay/levelobjects/Switch.cs" id="17_mts0j"]
+[ext_resource type="Script" path="res://game/src/gameplay/levelobjects/objectives/ColouredObject.cs" id="17_na8cu"]
 [ext_resource type="Script" path="res://game/src/gameplay/levelobjects/LevelObjectButton.cs" id="18_velsj"]
 [ext_resource type="Script" path="res://game/src/gameplay/levelobjects/HiddenRoom.cs" id="19_mmgau"]
 [ext_resource type="Script" path="res://game/src/graphics/CanvasGroupShaderScript.cs" id="20_usd4b"]
@@ -29,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://bgjr4ty6djd8r" path="res://game/assets/sprites/button_1.png" id="22_u2wte"]
 [ext_resource type="Script" path="res://game/src/gameplay/levelobjects/objectives/GreyPatch.cs" id="22_yvv2w"]
 [ext_resource type="Script" path="res://game/src/graphics/objects/WigglingPolygon2D.cs" id="23_3l5hd"]
+[ext_resource type="Script" path="res://game/src/gameplay/levelobjects/objectives/ColourBarrier.cs" id="25_2tdo3"]
 [ext_resource type="Shader" path="res://game/shaders/screenwide/colour_corrector.gdshader" id="25_xuo51"]
 [ext_resource type="Script" path="res://game/scenes/worlds/control_ui_level.gd" id="25_xvske"]
 
@@ -165,6 +168,9 @@ shader_parameter/blur_radius = Vector2(1, 1)
 shader_parameter/alpha = 1.0
 shader_parameter/blur_strength = -0.002
 shader_parameter/samples = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g1x44"]
+size = Vector2(106, 286)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2aijy"]
 shader = ExtResource("5_j2x1c")
@@ -724,6 +730,86 @@ tile_map_data = PackedByteArray("AADL/wMAAwAEAAQAAADM/wMAAwAFAAQAAADK/wMAAwADAAQ
 tile_set = ExtResource("3_mhjwf")
 collision_enabled = false
 
+[node name="Blue2" type="Node2D" parent="Rendered/SavedObjects"]
+position = Vector2(16972, -938)
+script = ExtResource("17_na8cu")
+PopupName = "blue six"
+
+[node name="InteractableArea2D" type="Area2D" parent="Rendered/SavedObjects/Blue2"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_tay8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rendered/SavedObjects/Blue2/InteractableArea2D"]
+shape = SubResource("CircleShape2D_xvfc2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rendered/SavedObjects/Blue2"]
+position = Vector2(-14, -5)
+texture = ExtResource("16_lwrl4")
+vframes = 4
+frame = 1
+
+[node name="Green" type="Node2D" parent="Rendered/SavedObjects"]
+position = Vector2(17102, -1265)
+script = ExtResource("17_na8cu")
+PopupName = "green eight"
+
+[node name="InteractableArea2D" type="Area2D" parent="Rendered/SavedObjects/Green"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_tay8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rendered/SavedObjects/Green/InteractableArea2D"]
+shape = SubResource("CircleShape2D_xvfc2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rendered/SavedObjects/Green"]
+material = SubResource("ShaderMaterial_0coss")
+position = Vector2(-25, -39)
+texture = ExtResource("16_lwrl4")
+vframes = 4
+frame = 2
+
+[node name="Green2" type="Node2D" parent="Rendered/SavedObjects"]
+position = Vector2(16907, -919)
+script = ExtResource("17_na8cu")
+PopupName = "green eight"
+
+[node name="InteractableArea2D" type="Area2D" parent="Rendered/SavedObjects/Green2"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_tay8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rendered/SavedObjects/Green2/InteractableArea2D"]
+shape = SubResource("CircleShape2D_xvfc2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rendered/SavedObjects/Green2"]
+material = SubResource("ShaderMaterial_0coss")
+position = Vector2(-25, -39)
+texture = ExtResource("16_lwrl4")
+vframes = 4
+frame = 2
+
+[node name="White" type="Node2D" parent="Rendered/SavedObjects"]
+position = Vector2(18557, -1164)
+scale = Vector2(2.165, 2.165)
+script = ExtResource("17_na8cu")
+PopupName = "white letter A"
+
+[node name="InteractableArea2D" type="Area2D" parent="Rendered/SavedObjects/White"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_tay8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rendered/SavedObjects/White/InteractableArea2D"]
+shape = SubResource("CircleShape2D_xvfc2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rendered/SavedObjects/White"]
+material = SubResource("ShaderMaterial_0coss")
+position = Vector2(-97.4596, -36.9515)
+texture = ExtResource("16_lwrl4")
+vframes = 4
+frame = 3
+
 [node name="Painting1" type="Node2D" parent="Rendered/SavedObjects"]
 position = Vector2(15050, 372)
 rotation = -0.169901
@@ -924,7 +1010,7 @@ one_way_collision = true
 remote_path = NodePath("../AnimatableBody2D")
 
 [node name="PlayerCharacter" parent="Rendered/SavedObjects" instance=ExtResource("2_blpnf")]
-position = Vector2(13580, -342)
+position = Vector2(17113, -1265)
 
 [node name="Lift" type="Node2D" parent="Rendered/SavedObjects"]
 position = Vector2(16640, -232)
@@ -1064,6 +1150,43 @@ collision_enabled = false
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rendered/SavedObjects/ForegroundPillar2/Area2D"]
 polygon = PackedVector2Array(-618, -575, -483, -400, -465, -60, -527, -14, -581, 170, -710, 274, -174, 273, -298, 174, -328, 68, -367, 5, -326, -454, -271, -464, -190, -534)
 
+[node name="ColourBarrier" type="StaticBody2D" parent="Rendered/SavedObjects"]
+position = Vector2(17309, -1387)
+script = ExtResource("25_2tdo3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rendered/SavedObjects/ColourBarrier"]
+position = Vector2(-63, 133)
+shape = SubResource("RectangleShape2D_g1x44")
+
+[node name="WigglingPolygon2D" type="Polygon2D" parent="Rendered/SavedObjects/ColourBarrier"]
+color = Color(0.344076, 0.344076, 0.344076, 1)
+polygon = PackedVector2Array(-1019, -521, -632, -395, -389, -267, -245, -155, -90, 77, -61, 374, -42, 147, -53, -14, -18, -214, 209, -425, 610, -609, 1258, -913, 1400, -1116)
+script = ExtResource("23_3l5hd")
+Subdivisions = 2
+Wavelength = 1.212
+Interval = 10
+WiggleAmount = 9.82
+WiggleSpeed = 5.84
+
+[node name="white arrow" type="Node2D" parent="Rendered/SavedObjects/ColourBarrier"]
+position = Vector2(-402, 127)
+script = ExtResource("8_6l1cu")
+PopupName = "follow the grey..."
+
+[node name="InteractableArea2D" type="Area2D" parent="Rendered/SavedObjects/ColourBarrier/white arrow"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("9_tay8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rendered/SavedObjects/ColourBarrier/white arrow/InteractableArea2D"]
+shape = SubResource("CircleShape2D_xvfc2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rendered/SavedObjects/ColourBarrier/white arrow"]
+position = Vector2(-9.53674e-07, -5.72205e-06)
+scale = Vector2(1.46591, 1.39773)
+texture = ExtResource("16_lwrl4")
+vframes = 4
+
 [node name="HiddenRoom_1" type="Node2D" parent="Rendered/SavedObjects" node_paths=PackedStringArray("HiddenObjects")]
 position = Vector2(16003.7, 629.93)
 script = ExtResource("19_mmgau")
@@ -1088,7 +1211,6 @@ tile_set = ExtResource("3_mhjwf")
 polygon = PackedVector2Array(-67.7178, -701.93, -195.718, -573.93, -259.718, -541.93, -355.718, -605.93, -835.718, -765.93, -1155.72, -669.93, -1475.72, -445.93, -1315.72, -93.9301, -131.718, -61.9301, 668.282, -125.93, 2556.28, -701.93, 2524.28, -1021.93, 2204.28, -1117.93, 1180.28, -1117.93, 828.282, -765.93, 476.282, -701.93)
 
 [node name="HiddenRoom_2" type="Node2D" parent="Rendered/SavedObjects" node_paths=PackedStringArray("HiddenObjects")]
-visible = false
 position = Vector2(16003.7, 629.93)
 script = ExtResource("19_mmgau")
 HiddenObjects = []
@@ -1252,7 +1374,7 @@ WiggleSpeed = 2.254
 
 [node name="Polygon2D2" type="Polygon2D" parent="Rendered/ObjectiveLayer/GreyPatches"]
 material = ExtResource("2_3wo41")
-position = Vector2(796, -79)
+position = Vector2(817, -89)
 offset = Vector2(-16656, 640)
 polygon = PackedVector2Array(17584.8, -1942.1, 17373.7, -1957.17, 17167.7, -1971.74, 16971.2, -1983.2, 16788.1, -1993.6, 16619.1, -2007.89, 16481.5, -2019.2, 16371.9, -2025.98, 16288.2, -2023.11, 16234.5, -2006.95, 16189.5, -1977.19, 16155, -1938.42, 16128.2, -1895.24, 16104.5, -1847.41, 16086, -1803.84, 16075, -1760.11, 16076, -1715.61, 16092.5, -1674.18, 16114.4, -1638.92, 16137.9, -1610.97, 16159.2, -1586.53, 16179.4, -1560.66, 16200.1, -1529.03, 16225.6, -1494.44, 16255.6, -1462.31, 16286.1, -1435.18, 16311.9, -1412.41, 16332.5, -1389.07, 16351.4, -1362.12, 16373, -1333.16, 16399.1, -1304.78, 16425.6, -1280.6, 16448, -1259.24, 16464.3, -1236, 16485, -1203.23, 16514.7, -1161.18, 16556.7, -1114.52, 16608.5, -1067.63, 16651.4, -1027.55, 16683, -990.361, 16704.4, -951.516, 16720.2, -909.872, 16738.8, -872.268, 16759.8, -843.586, 16777.9, -825.152, 16789.7, -814.059, 16792.7, -798.871, 16791.4, -777.136, 16791, -751.406, 16791.4, -726.641, 16786.9, -706.362, 16772.4, -688.899, 16747, -669.7, 16713.6, -645.195, 16682.9, -617.352, 16656.2, -590.809, 16631, -569.103, 16602.3, -551.942, 16562.7, -531.164, 16514.4, -502.377, 16463.6, -465.278, 16412.5, -423.813, 16369.5, -390.851, 16329.4, -367.496, 16289.2, -350.657, 16248.6, -335.467, 16213.6, -316.379, 16186.9, -296.342, 16168.8, -279.888, 16154.7, -269.44, 16136.8, -260.22, 16115, -247.279, 16093.6, -227.576, 16077.5, -202.818, 16069.4, -174.315, 16066.1, -145.604, 16062.4, -116.116, 16056.8, -81.1957, 16043.6, -43.9146, 16027.9, -4.60948, 16011.8, 32.7154, 15993, 63.685, 15971.4, 92.7697, 15944.5, 123.948, 15914.3, 162.051, 15885.5, 208.146, 15862, 248.909, 15843, 279.47, 15823.3, 297.603, 15799.4, 306.287, 15768.6, 318.968, 15735.3, 338.027, 15703.4, 364.086, 15673.5, 392.186, 15640.3, 405.202, 15599.8, 404.885, 15550.9, 404.701, 15496.9, 408.161, 15447.6, 417.289, 15404.1, 427.414, 15364.2, 434.077, 15322.2, 437.661, 15298.3, 443.374, 15294.9, 455.576, 15316.8, 474.698, 15366.7, 496.743, 15420, 510.564, 15472.5, 515.146, 15520.2, 514.419, 15564.7, 513.244, 15607.7, 511.483, 15652.7, 506.123, 15699.7, 491.758, 15744.1, 466.048, 15784.1, 440.541, 15819, 420.207, 15852.7, 407.961, 15889.5, 402.006, 15929.2, 387.663, 15967.9, 361.455, 16001.4, 324.967, 16027.7, 282.876, 16047.1, 248.888, 16064.4, 222.571, 16082.4, 199.17, 16098.9, 174.349, 16111.1, 141.275, 16115.7, 103.975, 16114.8, 66.9261, 16112.5, 31.1039, 16116, -2.60048, 16123.3, -39.0318, 16130.3, -79.3526, 16132.9, -120.511, 16136.2, -154.751, 16144.1, -179.775, 16161.6, -198.297, 16189, -215.288, 16223.8, -233.845, 16261.7, -252.136, 16301.2, -265.558, 16345.7, -270.676, 16390.7, -277.196, 16438.1, -289.822, 16484.1, -311.981, 16524.5, -343.208, 16563.3, -372.877, 16603.1, -396.678, 16649.4, -414.492, 16705.3, -430.374, 16758.5, -449.572, 16804.1, -473.016, 16838.3, -497.49, 16862.3, -518.16, 16895.1, -536.382, 16940.4, -555.248, 16997.7, -579.264, 17062.4, -610.701, 17123.3, -640.927, 17181, -664.969, 17239.4, -679.939, 17303.1, -687.715, 17369.1, -692.358, 17433.5, -697.279, 17491.3, -701.737, 17540.9, -701.013, 17585.1, -697.181, 17628, -690.757, 17671.9, -685.817, 17714.6, -686.655, 17758.3, -692.385, 17799.7, -698.932, 17841.8, -701.53, 17889.5, -699.291, 17940.2, -696.57, 17993.2, -698.196, 18043.2, -706.232, 18086.9, -717.555, 18123.8, -728.811, 18159, -737.773, 18195.9, -746.732, 18234.5, -760.663, 18271.3, -778.704, 18301.2, -798.942, 18323.9, -816.192, 18343, -827.074, 18363.1, -835.117, 18385.9, -845.057, 18408.1, -861.239, 18425, -883.11, 18437.7, -904.329, 18448.8, -920.628, 18462.8, -931.74, 18482.5, -941.765, 18504.7, -958.595, 18524.3, -983.073, 18538.7, -1011.15, 18548.4, -1037.99, 18561, -1063.06, 18580.4, -1089.49, 18606, -1122.67, 18633, -1164.78, 18655.1, -1213.88, 18672.2, -1265.01, 18687.9, -1315.37, 18706.7, -1366.88, 18721.9, -1427.63, 18730, -1500.9, 18726.5, -1584.97, 18709.6, -1675.05, 18688.8, -1773.75, 18669.4, -1881.59, 18654, -2003.47, 18639.6, -2143.6, 18597.1, -2234.54, 18524.1, -2272.16, 18422.4, -2252.03, 18295.7, -2173.34, 18191.5, -2104.42, 18107.8, -2050.04, 18040.3, -2011.19, 17984.5, -1984.69, 17885.4, -1964.67, 17747.1, -1949.01)
 script = ExtResource("23_3l5hd")
@@ -1269,29 +1391,10 @@ Interval = 10
 WiggleAmount = 1.935
 WiggleSpeed = 7.77
 
-[node name="Polygon2D5" type="Polygon2D" parent="Rendered/ObjectiveLayer/GreyPatches"]
-material = SubResource("ShaderMaterial_nfdr4")
-position = Vector2(-13953, 381)
-polygon = PackedVector2Array(9763.85, 1098.93, 9573, 827, 9383.15, 524.24, 9293, 355, 9226.82, 206.162, 9197.53, 6.67493, 9172.74, -162.145, 9180.08, -327.144, 9188.9, -525.4, 9299.43, -326.123, 9406.77, -132.609, 9502, 30, 9609.99, 202.054, 9709, 366, 9883.9, 585.137, 10006.5, 707.766, 10277, 978.426)
-script = ExtResource("23_3l5hd")
-Subdivisions = 3
-Interval = 10
-WiggleAmount = 4.465
-WiggleSpeed = 8.465
-
-[node name="Polygon2D6" type="Polygon2D" parent="Rendered/ObjectiveLayer/GreyPatches"]
-material = SubResource("ShaderMaterial_nfdr4")
-position = Vector2(-15802, 628)
-polygon = PackedVector2Array(12364, 962, 12252, 670, 12204, 370, 12172, 34, 12156, -242, 12148, -586, 12140, -970, 12144, -1438, 12184, -1710, 12308, -1450, 12448, -1106, 12632, -702, 12928, -270, 13520, 250, 14104, 698)
-script = ExtResource("23_3l5hd")
-Subdivisions = 2
-Interval = 10
-WiggleAmount = 10.695
-WiggleSpeed = 3.11
-
 [node name="HiddenObjects" type="Node" parent="Rendered"]
 
 [node name="Label" type="Label" parent="Rendered/HiddenObjects"]
+visible = false
 offset_left = 16604.0
 offset_top = -55.0
 offset_right = 17261.0
@@ -1301,6 +1404,7 @@ text = "This room requires \"climb\" to access"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label2" type="Label" parent="Rendered/HiddenObjects"]
+visible = false
 offset_left = 15147.0
 offset_top = -1244.0
 offset_right = 15353.0
@@ -1310,6 +1414,7 @@ text = "Add platforms here"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label3" type="Label" parent="Rendered/HiddenObjects"]
+visible = false
 offset_left = 16280.0
 offset_top = -495.0
 offset_right = 16486.0
@@ -1319,6 +1424,7 @@ text = "These should be platforms"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label4" type="Label" parent="Rendered/HiddenObjects"]
+visible = false
 offset_left = 16190.0
 offset_top = -1047.0
 offset_right = 16655.0
@@ -1328,6 +1434,7 @@ text = "Add an interaction here. it will pop up the phrase  \"too high\""
 metadata/_edit_use_anchors_ = true
 
 [node name="Label6" type="Label" parent="Rendered/HiddenObjects"]
+visible = false
 offset_left = 17146.0
 offset_top = -1408.0
 offset_right = 17655.0
@@ -1339,6 +1446,7 @@ They cannot be interacted while everything is still black and white"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label7" type="Label" parent="Rendered/HiddenObjects"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.272569
 anchor_right = -0.272569
@@ -1352,6 +1460,7 @@ before learning the word \"colour\""
 metadata/_edit_use_anchors_ = true
 
 [node name="Label8" type="Label" parent="Rendered/HiddenObjects"]
+visible = false
 offset_left = 18944.0
 offset_top = -1320.0
 offset_right = 19150.0
@@ -1361,6 +1470,7 @@ text = "Transition to next level"
 metadata/_edit_use_anchors_ = true
 
 [node name="There should be structural supports and background walls" type="Label" parent="Rendered/HiddenObjects"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.178819
 anchor_right = -0.178819
@@ -1373,6 +1483,7 @@ text = "There should be structural supports and background walls everywhere beca
 metadata/_edit_use_anchors_ = true
 
 [node name="Label10" type="Label" parent="Rendered/HiddenObjects"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.205729
 anchor_right = -0.205729
