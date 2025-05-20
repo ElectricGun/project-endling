@@ -1,4 +1,4 @@
-An unfinished concept of a word themed puzzle metroidvania.
+An unfinished concept of a word themed puzzle metroidvania. Not intended to be functional
 
 ---------- ORIGINAL README BELOW ----------
 
