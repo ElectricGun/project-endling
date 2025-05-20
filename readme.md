@@ -1,3 +1,7 @@
+An unfinished concept of a word themed puzzle metroidvania.
+
+---------- ORIGINAL README BELOW ----------
+
 IMPORTANT
 
 Save Schema (revision 2):
